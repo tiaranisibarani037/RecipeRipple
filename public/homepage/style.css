@@ -1,0 +1,260 @@
+/* General Styles */
+body {
+    font-family: "Arial", sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+}
+
+h1,
+h2,
+h5 {
+    font-family: "Georgia", serif;
+    color: #3303;
+}
+
+/* Navbar Styles */
+.navbar {
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.nav-link {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    color: #333;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+/* button */
+.btn {
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #f44708;
+}
+
+.btn-search {
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #f44708;
+    color: white; /* Mengubah warna teks dalam input menjadi putih */
+    border: 2px solid #f44708; /* Menambahkan border oranye */
+}
+
+/* Hero Section */
+.hero-section {
+    background-image: url("../frontend/images/bg-head.png"); /* Change the background image as per your requirement */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: white;
+}
+
+.hero-section .display-4 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero-section p.lead {
+    font-size: 1.2rem;
+}
+
+.hero-section .btn-lg {
+    background-color: #f44708;
+    border-color: #f44708;
+}
+
+.hero-section .btn-lg:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Popular Recipes Section */
+.popular-recipes h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.recipe-card {
+    transition: transform 0.3s ease;
+}
+
+.recipe-card img {
+    border-radius: 8px;
+    max-height: 150px;
+    object-fit: cover;
+}
+
+.recipe-card h5 {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.recipe-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Recipe Categories */
+.recipe-categories h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.category-card {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.category-card:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-10px);
+}
+
+.category-card h5 {
+    font-size: 1.3rem;
+}
+
+.category-card p {
+    font-size: 1rem;
+}
+
+/* About Us Section */
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    flex-wrap: wrap;
+}
+.about-image {
+    width: 200px;
+    height: 200px;
+    background-color: #8B0000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+.about-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.about-content {
+    max-width: 500px;
+    text-align: center;
+}
+.about-content h2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.about-content p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+@media (min-width: 768px) {
+    .about-content {
+        text-align: left;
+    }
+}
+
+/* Footer Styles */
+footer {
+    background-color: #550527;
+    color: #fff;
+}
+
+footer p {
+    font-size: 1.1rem;
+}
+
+footer a {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+footer a:hover {
+    color: #007bff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 70vh;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .recipe-card img {
+        max-height: 120px;
+    }
+}
+
+body {
+    font-family: "Arial", sans-serif;
+}
+.category-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    background-color: #fff7f0;
+}
+.category-card img {
+    width: 100%;
+    height: auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.category-card .card-body {
+    padding: 15px;
+}
+.category-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.category-card .card-text {
+    color: #6c757d;
+}
+.category-card .rating {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.category-card .rating i {
+    color: #ffc107;
+    margin-right: 5px;
+}
+.category-card .heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff6f61;
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+}
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: #ff6f61;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

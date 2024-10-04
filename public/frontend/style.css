@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+}
+
+.bg-image {
+  background-image: url('../frontend/images/bg-login.png'); /* Add your background image here */
+  background-size: cover;
+  background-position: center;
+}
+
+.login-box {
+  background-color: white;
+  max-width: 400px;
+  width: 100%;
+}
+
+.logo {
+  width: 50px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  .login-box {
+    padding: 2rem;
+  }
+}
+
+.a .b .c .d h1{
+  color: red;
+  
+}
