@@ -12,7 +12,7 @@ body, html {
   background-image: url('../frontend/images/bg-login.png'); /* Add your background image here */
   background-size: cover;
   background-position: center;
-}
+} 
 
 .login-box {
   background-color: white;

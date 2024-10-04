@@ -15,7 +15,7 @@
       <div class="text-center mb-4">
         <img src="{{url('frontend/images/logo.png')}}" alt="Logo" class="logo mb-3">
         <h5 class="card-title">
-          LET'S GET YOU STARTED
+          LET'S GET YOU STARTED 
         </h5>
         <h2 class="card-subtitle mb-2 text-muted">
           Create an account
