@@ -7,7 +7,16 @@
 body, html {
   height: 100%;
 }
+h3 {
+  font-size: 16px !important;
+}
 
+.card-title {
+  font-size: 14px !important;
+}
+.card-subtitle {
+  font-size: 24px !important;
+}
 .bg-image {
   background-image: url('../frontend/images/bg-login.png'); /* Add your background image here */
   background-size: cover;
@@ -17,11 +26,20 @@ body, html {
 .login-box {
   background-color: white;
   max-width: 400px;
+  height: 507px;
   width: 100%;
+  border-radius: 20px !important; /* Ubah angka ini untuk rounded yang lebih besar/kecil */
+  padding: 20px !important;
 }
 
 .logo {
   width: 50px;
+}
+
+.signup-box {
+  background-color: white;
+  max-width: 400px;
+  width: 100%;
 }
 
 .toggle-password {
@@ -41,4 +59,22 @@ body, html {
 .a .b .c .d h1{
   color: red;
   
+}
+
+/* Login button */
+.btn-primary {
+  background-color: #F44708 !important; /* Warna tombol (bisa diubah) */
+  color: white; /* Warna teks */
+  width: 40%; /* Panjang tombol, diatur 100% sesuai elemen parent */
+  max-width: 400px; /* Batasi lebar maksimal jika perlu */
+  border-radius: 50px; /* Rounded effect, bisa diubah sesuai preferensi */
+  border-color: #F44708 !important;
+  padding: 10px 20px; /* Mengatur padding tombol */
+  font-size: 16px; /* Ukuran teks */
+  font-weight: bold !important;
+  transition: background-color 0.3s ease; /* Transisi halus pada hover */
+}
+
+.btn-primary:hover {
+  background-color: #e9480e !important; /* Warna tombol saat di-hover */
 }

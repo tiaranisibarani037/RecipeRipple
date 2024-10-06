@@ -25,6 +25,7 @@ Route::get('/login', function(){
 });
 
 Route::get('/signup', [signupController::class, 'index']); 
+Route::post('/signup', [signupController::class, 'store']);
 
 Route::post('postlogin', 'App\Http\Controllers\LoginController@postlogin')->name('postlogin');
 Route::get('logout', 'App\Http\Controllers\LoginController@logout')->name('logout');
