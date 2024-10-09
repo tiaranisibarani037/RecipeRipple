@@ -40,3 +40,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboardPage');
 });
+
+Route::get('/writeresep', function () {
+    return view('writeResepPage');
+});
