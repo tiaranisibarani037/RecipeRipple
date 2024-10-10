@@ -57,7 +57,7 @@
                     <h1 class="display-4"> <span style="color: #ffffff" ;>Recipe</span> <span style="color: #F44708; ">Ripple</span></h1>
                     <p class="lead">"Bumbu yang Tepat, Masakan yang Hebat!"</p>
                     <p>Selamat datang di RecipeRipple, tempat di mana setiap resep menjadi inspirasi! Temukan, bagikan, dan nikmati kreasi kuliner dari seluruh dunia, langsung dari dapur rumah Anda.</p>
-                    <a href="#" class="btn btn-lg" style="color: #ffffff">Mulailah memasak!</a>
+                    <a href="writeresep" class="btn btn-lg" style="color: #ffffff">Mulailah memasak!</a>
                 </div>
             </div>
         </div>
