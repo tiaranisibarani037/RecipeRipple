@@ -1,14 +1,19 @@
 /* General Styles */
 body {
-    font-family: "Arial", sans-serif;
+    font-family: "Montserrat", sans-serif;
     line-height: 1.6;
     background-color: #f8f9fa;
 }
 
-h1,
-h2,
+h2 {
+    font-family: "Montserrat", sans-serif;
+    color: #3303;
+}
+p {
+    font-family: "Montserrat", sans-serif;
+}
 h5 {
-    font-family: "Georgia", serif;
+    font-family: "Montserrat", sans-serif;
     color: #3303;
 }
 
@@ -30,7 +35,11 @@ h5 {
 }
 
 .nav-link:hover {
-    color: #007bff;
+    color: #f44708;
+}
+
+.nav-link.active {
+    color: #f44708;
 }
 
 /* button */
@@ -40,11 +49,14 @@ h5 {
     background-color: #f44708;
 }
 
+.btn-search::placeholder {
+    color: rgba(255, 255, 255, 0.737);
+}
+
 .btn-search {
     font-size: 1rem;
     font-weight: bold;
     background-color: #f44708;
-    color: white; /* Mengubah warna teks dalam input menjadi putih */
     border: 2px solid #f44708; /* Menambahkan border oranye */
 }
 
@@ -72,8 +84,8 @@ h5 {
 }
 
 .hero-section .btn-lg:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #bf3b0a;
+    border-color: #b83709;
 }
 
 /* Popular Recipes Section */
@@ -115,8 +127,8 @@ h5 {
 }
 
 .category-card:hover {
-    background-color: #007bff;
-    color: white;
+    background-color: #bd491f;
+    color: #bb3c0e;
     transform: translateY(-10px);
 }
 
@@ -163,6 +175,8 @@ h5 {
 .about-content p {
     font-size: 18px;
     line-height: 1.6;
+    color: #333;
+    font-weight: thin;
 }
 @media (min-width: 768px) {
     .about-content {

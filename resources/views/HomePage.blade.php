@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Ripple</title>
+    <title>Recipe Ripple | Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
 
@@ -30,21 +30,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link active" href="#" style="color:#F44708">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="#about">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About Us</a>
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
                 <form class="d-flex ms-3">
                     <input class="form-control me-2 btn-search" type="search" placeholder="Cari resep favoritmu..." aria-label="Search">
-                    <a href="login" class="btn btn-sign">Login</a>
+                    <a href="login" class="btn btn-sign" style="color:#ffffff">Login</a>
                 </form>
             </div>
     </nav>
@@ -57,7 +57,7 @@
                     <h1 class="display-4"> <span style="color: #ffffff" ;>Recipe</span> <span style="color: #F44708; ">Ripple</span></h1>
                     <p class="lead">"Bumbu yang Tepat, Masakan yang Hebat!"</p>
                     <p>Selamat datang di RecipeRipple, tempat di mana setiap resep menjadi inspirasi! Temukan, bagikan, dan nikmati kreasi kuliner dari seluruh dunia, langsung dari dapur rumah Anda.</p>
-                    <a href="#" class="btn btn-lg">Mulailah memasak!</a>
+                    <a href="#" class="btn btn-lg" style="color: #ffffff">Mulailah memasak!</a>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
     <!-- Popular Recipes -->
     <section class="popular-recipes py-5">
         <div class="container text-center">
-            <h2>Popular Recipes</h2>
+            <h2><strong>Popular Recipes</h2>
             <div class="row">
                 <div class="col-6 col-md-3">
                     <div class="recipe-card shadow-sm p-3 mb-5 bg-white rounded">
@@ -116,7 +116,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card category-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                                <img alt="Appetizer image" style="width: 75%; height:75%; border-radius:15px;" class="mt-4" src="https://storage.googleapis.com/a1aa/image/AcbChfeGsToUzkYlMWrrhrQnfvpTGmvreakw4mkH24vpqHMOB.jpg" />
+                                <img src="{{url('frontend/images/appetizer.png')}}" class="mt-4" alt="Appetizer image" style="width: 75%; height:75%; border-radius:15px;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         Appetizer
@@ -143,7 +143,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card category-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                                <img alt="Main Course image" style="width: 75%; height:75%; border-radius:15px;" class="mt-4" src="https://storage.googleapis.com/a1aa/image/cYvZVuRxYWaHIdPPuftjXeZPwS1lx6NLd7BkCAZw7dln6BjTA.jpg" />
+                                <img src="{{url('frontend/images/maincourse.png')}}" class="mt-4" alt="Appetizer image" style="width: 75%; height:75%; border-radius:15px;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         Main Course
@@ -168,7 +168,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card category-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                                <img alt="Dessert image" style="width: 75%; height:75%; border-radius:15px;" class="mt-4" src="https://storage.googleapis.com/a1aa/image/8yTtd5tXCYKyCxhtSvmy16NhwXXKfEqT6pUEAm1fBl3o6BjTA.jpg" />
+                                <img src="{{url('frontend/images/dessert.png')}}" class="mt-4" alt="Appetizer image" style="width: 75%; height:75%; border-radius:15px;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         Dessert
@@ -204,7 +204,7 @@
                 <img src="{{url('frontend/images/logo-about.png')}}" height="200"  width="200" />
             </div>
             <div class="about-content">
-                <h2>
+                <h2 style="color: black;">
                     About Us
                 </h2>
                 <p>
