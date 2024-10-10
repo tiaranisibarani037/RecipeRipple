@@ -35,6 +35,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboardPage');
+});
+
 Route::get('/writeresep', function () {
-    return view('writeresepPage');
+    return view('writeResepPage');
 });
