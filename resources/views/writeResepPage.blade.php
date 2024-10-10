@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Recipe Ripple</title>
-  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
   <style>
     body {
       background-color: #fdf6e3;
@@ -12,20 +13,25 @@
       display: flex;
       flex-direction: column;
     }
+
     .navbar {
       background-color: #ffffff;
       padding: 1rem;
     }
+
     .navbar-brand {
       font-weight: bold;
       color: #ff4500;
     }
+
     .navbar-nav .nav-link {
       color: #000000;
       margin-right: 1rem;
       text-align: center;
     }
-    .navbar-nav .nav-link i, .navbar-nav .nav-link img {
+
+    .navbar-nav .nav-link i,
+    .navbar-nav .nav-link img {
       display: block;
       margin: 0 auto;
       width: 30px;
@@ -41,7 +47,9 @@
       margin: 2rem auto;
     }
 
-    .hero-section h1, .hero-section img, .hero-section button {
+    .hero-section h1,
+    .hero-section img,
+    .hero-section button {
       display: block;
       margin: 1rem auto;
     }
@@ -117,11 +125,12 @@
     }
   </style>
 </head>
+
 <body>
   <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="#">
-      <img alt="Logo" class="d-inline-block align-top" height="30" src="https://storage.googleapis.com/a1aa/image/0GfnZljQtelHD0DtkaAeVPjZLhSG1946IuOJ7oEE1gxjbfTOB.jpg" width="30"/>
-      Recipe Ripple
+      <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
+      Recipe <span style="color: orange;">Ripple</span>
     </a>
     <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" id="navbar-toggler">
       <i class="fas fa-bars navbar-toggler-icon"></i>
@@ -154,7 +163,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-            <img alt="User Profile" class="d-inline-block align-top rounded-circle" height="30" src="https://storage.googleapis.com/a1aa/image/Lfq93qG3G7xrNqGtr0QA0LAtnPHGl3cByPpfZ7GCQZPztfJnA.jpg" width="30"/>
+            <img alt="User Profile" class="d-inline-block align-top rounded-circle" height="30" src="https://storage.googleapis.com/a1aa/image/Lfq93qG3G7xrNqGtr0QA0LAtnPHGl3cByPpfZ7GCQZPztfJnA.jpg" width="30" />
             <div>Profil</div>
           </a>
         </li>
@@ -167,7 +176,7 @@
       <div class="col-lg-8 col-md-10 col-sm-12">
         <div class="hero-section">
           <h1>Simpan semua masakanmu dalam satu tempat</h1>
-          <img alt="Icon of a fork and knife crossed" class="img-fluid" src="https://storage.googleapis.com/a1aa/image/UmpT0oeDO7TsFq6250P9z0Me1A1MWnBntwqdItUMgpFWMBlTA.jpg" style="max-width: 100px; height: auto;"/>
+          <img alt="Icon of a fork and knife crossed" class="img-fluid" src="https://storage.googleapis.com/a1aa/image/UmpT0oeDO7TsFq6250P9z0Me1A1MWnBntwqdItUMgpFWMBlTA.jpg" style="max-width: 100px; height: auto;" />
           <button class="btn btn-lg">Tulis Resepmu Disini!</button>
         </div>
       </div>
@@ -189,10 +198,11 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document.getElementById('navbar-toggler').addEventListener('click', function () {
+    document.getElementById('navbar-toggler').addEventListener('click', function() {
       var navbarNav = document.getElementById('navbarNav');
       navbarNav.classList.toggle('show');
     });
   </script>
 </body>
+
 </html>
