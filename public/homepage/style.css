@@ -37,7 +37,8 @@ h5 {
 .btn {
     font-size: 1rem;
     font-weight: bold;
-    background-color: #f44708;
+    /* background-color: #f44708; dengan kecerahan 83%*/
+    background-color: #f44708d9;
 }
 
 .btn-search {
