@@ -30,11 +30,9 @@ Route::post('/signup', [signupController::class, 'store']);
 Route::post('postlogin', 'App\Http\Controllers\LoginController@postlogin')->name('postlogin');
 Route::get('logout', 'App\Http\Controllers\LoginController@logout')->name('logout');
 
-Route::get('/home', [homeController::class, 'index']);
-
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
