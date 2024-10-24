@@ -63,6 +63,7 @@
     </nav>
 
     <!-- Hero Section -->
+
     <section class="hero-section d-flex align-items-center">
         <div class="container">
             <div class="row">
@@ -71,6 +72,7 @@
                     <p class="lead" style="font-size: 20px;">"Bumbu yang Tepat, Masakan yang Hebat!"</p>
                     <p style="font-size: 19px;">Selamat datang di RecipeRipple, tempat di mana setiap resep menjadi inspirasi! Temukan, bagikan, dan nikmati kreasi kuliner dari seluruh dunia, langsung dari dapur rumah Anda.</p>
                     <a href="writeresep" class="btn btn-lg" style="color: #ffffff; background-color: #F44708; font-size: 20px;">Mulailah memasak!</a>
+
                 </div>
             </div>
         </div>
