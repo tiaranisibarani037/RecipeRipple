@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>Recipe Ripple</title>
-  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
     body {
       background-color: #fdf6e3;
@@ -38,34 +37,40 @@
       color: #f44708;
     }
 
-    .hero-section {
-      background-color: #4b0026;
-      color: #ffffff;
+    .notification-container {
       text-align: center;
-      padding: 3rem;
-      border-radius: 20px;
-      margin: 2rem auto;
+      margin-top: 2rem;
     }
 
-    .hero-section h1,
-    .hero-section img,
-    .hero-section button {
-      display: block;
-      margin: 1rem auto;
+    .notification-container h1 {
+      font-size: 45px;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 2rem;
     }
 
-    .hero-section button {
-      background-color: #ff4500;
-      color: #ffffff;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
-      font-size: 1.25rem;
-      transition: background-color 0.3s ease;
+    .notification-card {
+      background-color: #550527;
+      color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
     }
 
-    .hero-section button:hover {
-      background-color: #e03e00;
+    .notification-card i {
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+
+    .notification-card .content {
+      text-align: left;
+    }
+
+    .notification-card .content p {
+      margin: 0;
+      font-weight: bold;
     }
 
     .about-container {
@@ -179,78 +184,80 @@
       .navbar-nav.show {
         display: flex;
       }
-
-      .hero-section {
-        padding: 2rem;
-      }
     }
   </style>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg">
-    <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
-        Recipe <span style="color: #F44708;">Ripple</span>
-    </a>
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
+          Recipe <span style="color: #F44708;">Ripple</span>
+      </a>
 
-    <!-- Toggler for mobile view -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+      <!-- Toggler for mobile view -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <!-- Navigation Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Navigation Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="/" style="display: flex; flex-direction: column; align-items: center;">
+                      <i class="fas fa-home"></i>
+                      Beranda
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#" style="display: flex; flex-direction: column; align-items: center;">
+                      <i class="fas fa-search"></i>
+                      Cari
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;">
+                      <i class="fas fa-pen"></i>
+                      Tulis
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center; color:#F44708">
+                      <i class="fas fa-bell"></i>
+                      Notifikasi
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
+                      <img src="{{ ('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle me-2" width="30" height="30"/>
+                      <span>Profil</span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </nav>
 
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/" style="display: flex; flex-direction: column; align-items: center;">
-                    <i class="fas fa-home"></i>
-                    Beranda
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" style="display: flex; flex-direction: column; align-items: center;">
-                    <i class="fas fa-search"></i>
-                    Cari
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;  color:#F44708">
-                    <i class="fas fa-pen"></i>
-                    Tulis
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center;">
-                    <i class="fas fa-bell"></i>
-                    Notifikasi
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
-                    <img src="{{ ('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle me-2" width="30" height="30"/>
-                    <span>Profil</span>
-                </a>
-            </li>
-        </ul>
+  <div class="container notification-container">
+    <h1>Notifikasi</h1>
+
+    <div class="notification-card">
+      <i class="fas fa-user-circle"></i>
+      <div class="content">
+        <p>[Ali**] meninggalkan komentar di postingan Anda: 'Ini adalah konten yang sangat menarik!'</p>
+        <small>Selamat datang Desri Dabukke! Ayo mulai memasak</small>
+      </div>
     </div>
-</nav>
 
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-md-10 col-sm-12">
-        <div class="hero-section">
-          <h1>Simpan semua masakanmu dalam satu tempat</h1>
-          <img alt="Icon of a fork and knife crossed" class="img-fluid" src="{{ ('frontend/images/tulis_resep.png') }}" style="max-width: 100px; height: auto;"/>
-          <button class="btn btn-lg"style="border-radius: 60px;">Tulis Resepmu Disini!</button>
-        </div>
+    <div class="notification-card">
+      <i class="fas fa-user-circle"></i>
+      <div class="content">
+        <p>[Bai**] menyukai postingan Anda.</p>
       </div>
     </div>
   </div>
 
-    <div class="about-container">
+  <div class="about-container">
       <h2>About Us</h2>
       <p>At RecipeRipple, we believe that cooking connects people. Our platform allows food lovers to discover, share, and enjoy recipes from around the world. Whether you’re a beginner or an experienced cook, we provide an easy way to explore new dishes, upload your own creations, and engage with a vibrant community.</p>
       <p>Join us in spreading the joy of cooking, one recipe at a time!</p>
@@ -299,5 +306,4 @@
     }
   </script>
 </body>
-
 </html>
