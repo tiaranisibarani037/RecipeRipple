@@ -46,8 +46,11 @@ h5 {
 .btn {
     font-size: 1rem;
     font-weight: bold;
-    /* background-color: #f44708; dengan kecerahan 83%*/
+    background-color: #f44708;
     background-color: #f44708d9;
+    border-radius: 40px;
+    
+
 }
 
 .btn-search::placeholder {
@@ -55,6 +58,8 @@ h5 {
 }
 
 .btn-search {
+    border-radius: 40px;
+    padding: 10px;
     font-size: 1rem;
     font-weight: bold;
     background-color: #f44708;
@@ -219,3 +224,85 @@ footer a:hover {
     }
 }
 
+body {
+    font-family: "Arial", sans-serif;
+}
+.category-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    background-color: #fff7f0;
+}
+.category-card img {
+    width: 100%;
+    height: auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.category-card .card-body {
+    padding: 15px;
+}
+.category-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.category-card .card-text {
+    color: #6c757d;
+}
+.category-card .rating {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.category-card .rating i {
+    color: #ffc107;
+    margin-right: 5px;
+}
+/*notes buat heart*/
+
+.category-card .heart-icon {
+    position: absolute;
+    top: -3px;
+    right: -2px;
+    background-color: #F44708;
+    width: 52px;
+    height: 52px;
+    color: white;
+    padding: 10px;
+    border-radius: 0px 22px
+}
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: #ff6f61;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*style like button*/
+.heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.heart-icon:hover {
+    color: red;
+}
+
+.heart-icon.liked {
+    color: red;
+    margin: auto;
+    margin-top: 0px;
+}
+
+/*warna bg icon*/
+
+.bg-orange {
+    background-color: #F44708;
+  }
