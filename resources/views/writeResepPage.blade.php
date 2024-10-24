@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Recipe Ripple</title>
-  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
   <style>
     body {
       background-color: #fdf6e3;
@@ -12,6 +13,7 @@
       display: flex;
       flex-direction: column;
     }
+
     .navbar {
       background-color: #FFFFFF;
       padding: 1rem;
@@ -45,7 +47,9 @@
       margin: 2rem auto;
     }
 
-    .hero-section h1, .hero-section img, .hero-section button {
+    .hero-section h1,
+    .hero-section img,
+    .hero-section button {
       display: block;
       margin: 1rem auto;
     }
@@ -198,6 +202,7 @@
 
     <!-- Navigation Links -->
     <div class="collapse navbar-collapse" id="navbarNav">
+
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
                 <a class="nav-link" href="/" style="display: flex; flex-direction: column; align-items: center;">
@@ -294,4 +299,5 @@
     }
   </script>
 </body>
+
 </html>
