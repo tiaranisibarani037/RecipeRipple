@@ -34,13 +34,34 @@ Route::get('/home', [homeController::class, 'index']);
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('HomePage');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboardPage');
+Route::get('/admin', function () {
+    return view('Admin/LoginAdminPage');
 });
 
 Route::get('/writeresep', function () {
     return view('writeResepPage');
 });
+
+Route::get('/resep', function () {
+    return view('resepPage');
+});
+
+Route::get('/notifikasi', function () {
+    return view('notifikasiPage');
+});
+
+Route::get('/profil', function () {
+    return view('profilPage');
+});
+
+Route::get('/editprofil', function () {
+    return view('editprofilePage');
+});
+
+Route::get('/updateprofil', function () {
+    return view('updateprofilPage');
+});
+Route::post('/updateprofil', 'ProfileController@update')->name('updateprofil');
