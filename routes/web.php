@@ -32,7 +32,7 @@ Route::get('logout', 'App\Http\Controllers\LoginController@logout')->name('logou
 
 
 Route::get('/', function () {
-    return view('home');
+    return view('HomePage');
 });
 
 Route::get('/dashboard', function () {
@@ -41,4 +41,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/writeresep', function () {
     return view('writeResepPage');
+});
+
+Route::get('/searchresep', function () {
+    return view('SearchResepPage');
 });
