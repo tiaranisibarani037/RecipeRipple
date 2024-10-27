@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Recipe Ripple - Profile</title>
+  <title>Edit Profile</title>
+  <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
   <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
@@ -207,7 +208,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/" style="display: flex; flex-direction: column; align-items: center;">
+                    <a class="nav-link" href="/beranda" style="display: flex; flex-direction: column; align-items: center;">
                         <i class="fas fa-home"></i>
                         Beranda
                     </a>
@@ -244,16 +245,21 @@
     <!-- Profile Popup -->
     <div class="profile-popup" id="profilePopup">
       <div class="d-flex align-items-center">
-        <img src="frontend/images/profile1.jpg" alt="User Profile" class="rounded-circle"/>
-        <div>
-          <a href="/profil">
-            <h5>Desri Dabukke</h5>
-          </a>
-          <p>desristenatalie26@gmail.com</p>
-        </div>
+          <img src="{{ url('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"/>
+          <div>
+              <a href="/profil">
+                  <h5>Desri Dabukke</h5>
+              </a>
+              <p>desristenatalie@gmail.com</p>
+          </div>
       </div>
-      <button onclick="logout()">Keluar</button>
-    </div>
+      <form action="{{ route('logout') }}" method="POST">
+          @csrf
+          <button type="submit" style="width: 100%; background-color: #f44708; color: white; border: none; border-radius: 5px; padding: 0.5rem; cursor: pointer;">
+              Keluar
+          </button>
+      </form>
+  </div>
 
     <!-- Edit Profile Section -->
     <div class="profile-edit-container" style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); width: 80%; margin: 2rem auto;">
@@ -273,15 +279,15 @@
             @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="name" name="name" required value="Desri Dabukke">
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required value="desristenatalie@gmail.com">
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">No Telepon</label>
-            <input type="tel" class="form-control" id="phone" name="phone" required value="085260419037">
+            <input type="tel" class="form-control" id="phone" name="phone" required>
         </div>
         <div class="mb-3">
             <label for="about" class="form-label">Tentang kamu dan masakanmu</label>
