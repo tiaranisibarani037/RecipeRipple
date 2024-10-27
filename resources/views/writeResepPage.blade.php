@@ -124,7 +124,6 @@
       min-width: 120px; /* Minimum width to prevent it from being too small */
       width: auto; /* Allow the width to adjust based on content */
     }
-
     .profile-popup img {
       width: 40px;
       height: 40px;
