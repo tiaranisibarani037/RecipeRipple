@@ -44,9 +44,9 @@ h5 {
 
 /* button */
 .btn {
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: bold;
-    background-color: #f44708;
+    margin-bottom: initial;
     background-color: #f44708d9;
     border-radius: 40px;
     

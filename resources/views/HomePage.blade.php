@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,17 +11,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .btn-sign {
-            background-color: #F44708; /* Set the background color to white */
-            color: #ffffff; /* Set the text color to white */
-            margin-left: 20px; /* Add margin to the left of the button */
+            background-color: #F44708;
+            color: #ffffff;
+            margin-left: 10px;
         }
         .btn-sign:hover {
-            background-color: #000000; /* Set the hover background color to black */
-            color: #ffffff; /* Set the hover text color to white */
+            background-color: #000000;
+            color: #ffffff;
         }
         .btn-search {
-            width: 300px; /* Set a fixed width for the search input */
-            
+            width: 300px;
+        }
+        /* Navbar Styles */
+        .navbar {
+            transition: transform 0.3s ease;
+        }
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-nav {
+            margin-left: auto;
         }
     </style>
 </head>
@@ -28,13 +43,11 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
-
                 Recipe <span style="color: #F44708;">Ripple</span>
-
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,18 +55,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                    <a class="nav-link active" href="#" style="color:#F44708; font-size: 18px;">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="font-size: 18px;">Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#about" style="font-size: 18px;">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact" style="font-size: 18px;">Contact</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" style="color:#F44708; font-size: 18px;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" style="font-size: 18px;">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" style="font-size: 18px;">Contact</a>
+                    </li>
                 </ul>
                 <form class="d-flex ms-3">
                     <input class="form-control me-2 btn-search" type="search" placeholder="Cari resep favoritmu..." aria-label="Search">
@@ -205,6 +215,23 @@
 </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script for hiding/showing navbar on scroll
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Scroll Down
+                navbar.classList.add('hidden');
+            } else {
+                // Scroll Up
+                navbar.classList.remove('hidden');
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
 </body>
 
 </html>
