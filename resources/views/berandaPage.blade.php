@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Ripple | Home</title>
+    <title>Recipe Ripple | Beranda</title>
     <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -23,39 +23,154 @@
             width: 300px; /* Set a fixed width for the search input */
             
         }
+
+        .navbar {
+        background-color: #FFFFFF;
+        padding: 1rem;
+        }
+
+        .navbar-brand {
+        font-weight: bold;
+        color: #040100;
+        }
+
+        .nav-link {
+        font-size: 1rem;
+        margin-left: 0.5rem;
+        color: #333;
+        }
+
+        .nav-link:hover {
+        color: #f44708;
+        }
+
+        .nav-link.active {
+        color: #f44708;
+        }
+
+        .profile-popup {
+      display: none; /* Hidden by default */
+      position: absolute; /* Positioning it absolutely */
+      top: 60px; /* Adjust this value based on navbar height */
+      right: 20px; /* Adjust to fit within the page */
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000; /* Ensures it appears above other elements */
+      padding: 1rem;
+      min-width: 120px; /* Minimum width to prevent it from being too small */
+      width: auto; /* Allow the width to adjust based on content */
+    }
+
+    .profile-popup img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+
+    .profile-popup h5 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .profile-popup p {
+      margin: 0.5rem 0;
+      font-size: 12px;
+    }
+
+    .profile-popup button {
+      width: 100%;
+      background-color: #f44708;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .profile-popup button:hover {
+      background-color: #FF6347;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-nav {
+        display: none;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        background-color: #ffffff;
+      }
+
+      .navbar-toggler {
+        display: block;
+        border: none;
+        background: none;
+      }
+
+      .navbar-toggler-icon {
+        font-size: 1.5rem;
+        color: #ff4500;
+      }
+
+      .navbar-nav.show {
+        display: flex;
+      }
+    }
     </style>
 </head>
 
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
-                Recipe <span style="color: #F44708;">Ripple</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                    <a class="nav-link active" href="#" style="color:#F44708; font-size: 18px;">Home</a>
+    <nav class="navbar navbar-expand-lg">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
+            Recipe <span style="color: #F44708;">Ripple</span>
+        </a>
+
+        <!-- Toggler for mobile view -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/beranda" style="display: flex; flex-direction: column; align-items: center; color:#F44708">
+                        <i class="fas fa-home"></i>
+                        Beranda
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about" style="font-size: 18px;">About Us</a>
+                    <a class="nav-link" href="#" style="display: flex; flex-direction: column; align-items: center;">
+                        <i class="fas fa-search"></i>
+                        Cari
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact" style="font-size: 18px;">Contact</a>
+                    <a class="nav-link" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;">
+                        <i class="fas fa-pen"></i>
+                        Tulis
+                    </a>
                 </li>
-                </ul>
-                <form class="d-flex ms-3">
-                    <input class="form-control me-2 btn-search" type="search" placeholder="Cari resep favoritmu..." aria-label="Search">
-                    <a href="login" class="btn btn-sign">Login</a>
-                </form>
-            </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center;">
+                        <i class="fas fa-bell"></i>
+                        Notifikasi
+                    </a>
+                </li>
+                <!-- Profile Link -->
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
+                        <img src="frontend/images/profile1.jpg" alt="User Profile" class="rounded-circle me-2" width="30" height="30"/>
+                        <span>Profil</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 
@@ -68,7 +183,7 @@
                     <h1 class="display-4"><span style="color: #ffffff;">Recipe</span> <span style="color: #F44708;">Ripple</span></h1>
                     <p class="lead" style="font-size: 20px;">"Bumbu yang Tepat, Masakan yang Hebat!"</p>
                     <p style="font-size: 19px;">Selamat datang di RecipeRipple, tempat di mana setiap resep menjadi inspirasi! Temukan, bagikan, dan nikmati kreasi kuliner dari seluruh dunia, langsung dari dapur rumah Anda.</p>
-                    <a href="login" class="btn btn-lg" style="color: #ffffff; background-color: #F44708; font-size: 20px;">Mulailah memasak!</a>
+                    <a href="writeresep" class="btn btn-lg" style="color: #ffffff; background-color: #F44708; font-size: 20px;">Tulis Resepmu Disini!</a>
 
                 </div>
             </div>
@@ -190,17 +305,55 @@
     </section>
 
 <!-- Footer -->
-<footer class="py-4 text-white text-center">
-    <div class="container" id="contact">
-    <p style="font-size: 30px;">Contact</p>
-        <a href="#" class="text-white me-3"><span class="bg-orange rounded-circle p-2"><i class="bi bi-facebook"></i></span></a>
-        <a href="#" class="text-white me-3"><span class="bg-orange rounded-circle p-2"><i class="bi bi-instagram"></i></span></a>
-        <a href="#" class="text-white me-3"><span class="bg-orange rounded-circle p-2"><i class="bi bi-twitter"></i></span></a>
-        <a href="#" class="text-white"><span class="bg-orange rounded-circle p-2"><i class="bi bi-telephone-fill"></i></span></a>
-    </div>
-</footer>
+    <footer class="py-4 text-white text-center">
+        <div class="container" id="contact">
+        <p style="font-size: 30px;">Contact</p>
+            <a href="#" class="text-white me-3"><span class="bg-orange rounded-circle p-2"><i class="bi bi-facebook"></i></span></a>
+            <a href="#" class="text-white me-3"><span class="bg-orange rounded-circle p-2"><i class="bi bi-instagram"></i></span></a>
+            <a href="#" class="text-white me-3"><span class="bg-orange rounded-circle p-2"><i class="bi bi-twitter"></i></span></a>
+            <a href="#" class="text-white"><span class="bg-orange rounded-circle p-2"><i class="bi bi-telephone-fill"></i></span></a>
+        </div>
+    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="profile-popup" id="profilePopup">
+        <div class="d-flex align-items-center">
+            <img src="{{ url('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"/>
+            <div>
+                <a href="/profil">
+                    <h5>Desri Dabukke</h5>
+                </a>
+                <p>desristenatalie@gmail.com</p>
+            </div>
+        </div>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" style="width: 100%; background-color: #f44708; color: white; border: none; border-radius: 5px; padding: 0.5rem; cursor: pointer;">
+                Keluar
+            </button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function toggleProfilePopup() {
+        const popup = document.getElementById('profilePopup');
+        popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function logout() {
+        // Implement logout functionality
+        alert("Logout clicked!");
+        // For example, redirect or perform logout logic here
+    }
+
+    // Hide popup when clicking outside
+    window.onclick = function(event) {
+        const popup = document.getElementById('profilePopup');
+        if (!event.target.closest('.nav-link') && !event.target.closest('#profilePopup')) {
+        popup.style.display = 'none'; // Hide popup
+        }
+    }
+    </script>
 </body>
 
 </html>

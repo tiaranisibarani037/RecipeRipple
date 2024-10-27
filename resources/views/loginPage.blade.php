@@ -6,6 +6,7 @@
   <title>Recipe Ripple | Login</title>
   <link rel="stylesheet" href="{{url('frontend/style.css')}}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
   
 </head>
 <body>
