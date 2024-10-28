@@ -249,7 +249,7 @@
         <table class="user-table">
             <thead>
                 <tr>
-                    <th>Foto Profil</th>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>Nomor Telepon</th>
                     <th>Email</th>
@@ -257,18 +257,18 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Contoh Data User -->
+                @foreach ($users as $user)
                 <tr>
-                    <td><img src="{{ url('../frontend/images/profile2.jpeg') }}" alt="Profile"></td>
-                    <td>John Doe</td>
-                    <td>081234567890</td>
-                    <td>john@example.com</td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->nomor_telepon }}</td>
+                    <td>{{ $user->email }}</td>
                     <td>
                         <button class="btn-edit" onclick="editUser()">Edit</button>
                         <button class="btn-delete" onclick="deleteUser()">Hapus</button>
                     </td>
                 </tr>
-                <!-- Data user lainnya dapat ditampilkan di sini -->
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -310,23 +310,17 @@
             }
         };
 
-        // Fungsi untuk menambah user baru
         function addUser() {
             alert("Fungsi untuk menambah user baru!");
-            // Anda bisa membuat modal atau mengarahkan ke halaman form penambahan user
         }
 
-        // Fungsi untuk mengedit user
         function editUser() {
             alert("Fungsi untuk mengedit user!");
-            // Anda bisa membuat modal atau mengarahkan ke halaman form edit user
         }
 
-        // Fungsi untuk menghapus user
         function deleteUser() {
             if (confirm("Apakah Anda yakin ingin menghapus user ini?")) {
                 alert("User berhasil dihapus!");
-                // Tambahkan logika penghapusan user di sini
             }
         }
     </script>

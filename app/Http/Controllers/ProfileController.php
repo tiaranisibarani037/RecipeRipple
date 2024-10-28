@@ -2,47 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\User; // Model untuk user (pastikan sudah dibuat)
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
-    // Method untuk menampilkan halaman profil yang telah di-update
-    public function showProfile()
+    public function show()
     {
-        // Dapatkan data user yang sedang login
-        $user = auth()->user();
-        
-        // Tampilkan halaman profil dengan data user
-        return view('profile', ['user' => $user]);
+        $user = Auth::user(); // Mendapatkan data pengguna yang sedang login
+        return view('profilPage', compact('user')); // Kirim data ke profilPage
     }
 
-    // Method untuk mengedit profil
-    public function editProfile()
+    public function edit()
     {
-        // Dapatkan data user yang sedang login
-        $user = auth()->user();
-        
-        // Tampilkan halaman edit profil dengan data user
-        return view('edit-profile', ['user' => $user]);
+        $user = Auth::user(); // Mendapatkan data pengguna yang sedang login
+        return view('editProfilePage', compact('user')); // Kirim data ke editProfilePage
     }
 
-    // Method untuk menyimpan perubahan profil
-    public function updateProfile(Request $request)
+    public function update(Request $request)
     {
-        // Validasi data dari form
-        $validatedData = $request->validate([
+        // Mendapatkan data pengguna yang sedang login
+        $user = Auth::user();
+
+        // Validasi data
+        $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . auth()->id(),
-            'phone' => 'required|string|max:15',
-            'about' => 'nullable|string|max:500',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'nomor_telepon' => 'required|string|max:15',
         ]);
 
-        // Update profil user yang sedang login
-        $user = auth()->user();
-        $user->update($validatedData);
+        // Update data pengguna
+        $update = DB::table('users')->where('id', $user->id)->update([
+            'name' => $request->input('name'),       // Mengupdate kolom 'name' dengan input dari request
+            'email' => $request->input('email'),     // Mengupdate kolom 'email' dengan input dari request
+            'nomor_telepon' => $request->input('nomor_telepon'),     // Mengupdate kolom 'phone' dengan input dari request
+        ]);
 
-        // Redirect ke halaman profil dengan pesan sukses
-        return redirect()->route('profile.show')->with('success', 'Profil berhasil diperbarui');
+        // Cek apakah update berhasil
+        if ($update) {
+            // Redirect ke halaman profil dengan pesan sukses
+            return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
+        } else {
+            // Redirect ke halaman edit profil dengan pesan error
+            return redirect()->route('profile.edit')->with('error', 'Failed to update profile.');
+        }
     }
 }

@@ -12,11 +12,17 @@ class signupController extends Controller
     }
 
     public function store(Request $request){
+// echo '<pre>';
+// print_r($_POST);
+// echo '<pre>';
+// exit;
+
+
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:8',
-            'nomor_telepon' => 'required|numeric' // pastikan sesuai dengan nama kolom di database
+            'nomor_telepon' => 'required' // pastikan sesuai dengan nama kolom di database
         ]);
 
         // Tambahkan 'role' sebagai default 'user' dan simpan password yang terenkripsi

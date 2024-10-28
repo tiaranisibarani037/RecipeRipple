@@ -505,9 +505,9 @@
             <img src="{{ url('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"/>
             <div>
                 <a href="/profil">
-                    <h5>Desri Dabukke</h5>
+                    <strong>{{ Auth::user()->name }}</strong><br>
                 </a>
-                <p>desristenatalie@gmail.com</p>
+                <small>{{ Auth::user()->email }}</small>
             </div>
         </div>
         <form action="{{ route('logout') }}" method="POST">
