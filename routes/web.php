@@ -102,3 +102,7 @@ Route::post('/recipes', [RecipeController::class, 'store'])->name('recipe.store'
 Route::get('/recipes', function () {
     return view('resepdetailPage');
 });
+
+Route::get('/searchresep', function () {
+    return view('searchresepPage');
+});
