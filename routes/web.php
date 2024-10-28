@@ -5,6 +5,8 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\homeController;
 use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\signupController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 
@@ -92,3 +94,9 @@ Route::get('/updateprofil', function () {
     return view('updateprofilPage');
 });
 Route::post('/updateprofil', 'ProfileController@update')->name('updateprofil');
+
+Route::post('/recipes', [RecipeController::class, 'store'])->name('recipe.store');
+
+Route::get('/recipes', function () {
+    return view('resepdetailPage');
+});

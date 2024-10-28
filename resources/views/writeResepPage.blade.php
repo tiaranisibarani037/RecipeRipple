@@ -47,6 +47,22 @@
       border-radius: 20px;
       margin: 2rem auto;
     }
+    .hero-section a {
+      background-color: #ff4500;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-size: 1.25rem;
+      transition: background-color 0.3s ease;
+      position: relative;
+    }
+
+    .hero-section a:hover {
+      background-color: #e03e00;
+    }
+
+
 
     .hero-section h1,
     .hero-section img,
@@ -157,6 +173,11 @@
 
     /* Responsive tweaks */
     @media (max-width: 768px) {
+      .nav-link {
+      font-size: 1rem;
+      margin-right: 50rem;
+      color: #333;
+    }
       .navbar-nav {
         display: none;
         flex-direction: column;
@@ -243,7 +264,8 @@
         <div class="hero-section">
           <h1>Simpan semua masakanmu dalam satu tempat</h1>
           <img alt="Icon of a fork and knife crossed" class="img-fluid" src="{{ ('frontend/images/tulis_resep.png') }}" style="max-width: 100px; height: auto;"/>
-          <button class="btn btn-lg"style="border-radius: 60px;">Tulis Resepmu Disini!</button>
+          <!-- <button class="btn btn-lg"style="border-radius: 60px;">Tulis Resepmu Disini!</button> -->
+          <a href="recipes" class="btn btn-lg" style="border-radius: 60px;">Tulis Resepmu Disini!</a>
         </div>
       </div>
     </div>
