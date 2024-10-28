@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipe Ripple | Sign Up</title>
+  <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{url('frontend/style.css')}}">
 </head>
@@ -27,7 +28,7 @@
           <label for="name" class="form-label">Name</label>
           <input type="name" id= "name" name="name" class="form-control @error('name') is-invalid
             
-          @enderror form-control-xl" placeholder="samuel sitio" required>
+          @enderror form-control-xl" required>
           @error('name')
           <small class="btn btn-danger">{{ $message }}</small>
           @enderror
@@ -37,7 +38,7 @@
           <label for="email" class="form-label">Email</label>
           <input type="email" id="Email" class="form-control @error('email') is-invalid
             
-          @enderror form-control-xl" name="email" placeholder="USER@gmail.com" required>
+          @enderror form-control-xl" name="email"required>
           @error('Email')
           <small class="btn btn-danger">{{ $message }}</small>
           @enderror
@@ -47,7 +48,7 @@
           <label for="password" class="form-label">Your password</label>
           <input type="password" id="password" class="form-control @error('password')
             
-          @enderror" name="password" placeholder="********" required>
+          @enderror" name="password" required>
           @error('password')
           <small class="btn btn-danger">{{ $message }}</small>
           @enderror
@@ -55,8 +56,8 @@
         </div>
 
         <div class="mb-3">
-          <label for="Phone-num" class="form-label">Phone Number</label>
-          <input type="Phone-num" class="form-control" id="number" name="Phone-num"placeholder="081234567890" required>
+          <label for="nomor_telepon" class="form-label">Phone Number</label>
+          <input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon" maxlength="15" required>
         </div>
         <button type="submit" class="btn btn-primary w-100">GET STARTED</button>
       </form>

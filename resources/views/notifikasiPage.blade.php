@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Recipe Ripple</title>
+  <title>Recipe Ripple | Notifikasi</title>
+  <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
   <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
@@ -205,7 +206,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                  <a class="nav-link" href="/" style="display: flex; flex-direction: column; align-items: center;">
+                  <a class="nav-link" href="/beranda" style="display: flex; flex-direction: column; align-items: center;">
                       <i class="fas fa-home"></i>
                       Beranda
                   </a>
@@ -272,16 +273,21 @@
 
   <!-- Profile Popup -->
   <div class="profile-popup" id="profilePopup">
-      <div class="d-flex align-items-center">
-        <img src="frontend/images/profile1.jpg" alt="User Profile" class="rounded-circle"/>
+    <div class="d-flex align-items-center">
+        <img src="{{ url('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"/>
         <div>
-          <a href="/profil">
-            <h5>Desri Dabukke</h5>
-          </a>
-          <p>desristenatalie@gmail.com</p>
+            <a href="/profil">
+                <h5>Desri Dabukke</h5>
+            </a>
+            <p>desristenatalie@gmail.com</p>
         </div>
-      </div>
-      <button onclick="logout()">Keluar</button>
+    </div>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" style="width: 100%; background-color: #f44708; color: white; border: none; border-radius: 5px; padding: 0.5rem; cursor: pointer;">
+            Keluar
+        </button>
+    </form>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
