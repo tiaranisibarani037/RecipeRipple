@@ -164,11 +164,6 @@
       justify-content: flex-start;
     }
 
-    .image-upload-container .btn {
-    border-radius: 24px; /* Set border-radius */
-    padding: 5px 15px; /* Padding inside the button */
-    }
-
     .btn-success {
     background-color: #28a745;
     border: none;
@@ -179,11 +174,6 @@
     background-color: #dc3545;
     border: none;
     color: white;
-    }
-
-    .image-preview {
-    border: 1px solid #ccc;
-    border-radius: 50%; /* Rounded circle for the image preview */
     }
 
   </style>
@@ -247,10 +237,10 @@
       <div class="d-flex align-items-center">
           <img src="{{ url('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"/>
           <div>
-              <a href="/profil">
-                  <h5>Desri Dabukke</h5>
-              </a>
-              <p>desristenatalie@gmail.com</p>
+            <a href="/profil">
+                <strong>{{ Auth::user()->name }}</strong><br>
+            </a>
+            <small>{{ Auth::user()->email }}</small>
           </div>
       </div>
       <form action="{{ route('logout') }}" method="POST">
@@ -262,37 +252,26 @@
   </div>
 
     <!-- Edit Profile Section -->
-    <div class="profile-edit-container" style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); width: 80%; margin: 2rem auto;">
-        <!-- Section for Image Upload -->
-        <div class="image-upload-container" style="display: flex; align-items: center;">
-            <div class="image-preview" id="imagePreview" style="background-color: #ccc; width: 100px; height: 100px; border-radius: 50%; margin-right: 10px; display: flex; justify-content: center; align-items: center; overflow: hidden;">
-              <img src="" alt="Image Preview" style="width: 100%; height: auto; display: none;">
-            </div>
-            <div style="display: flex; flex-direction: column;"> <!-- Make this a column flex container -->
-              <input type="file" id="uploadImage" accept="image/*" style="display: none;">
-              <button onclick="document.getElementById('uploadImage').click();" class="btn btn-success" style="margin-bottom: 5px;">Upload Image</button>
-              <button onclick="removeImage();" class="btn btn-danger">Hapus Image</button>
-            </div>
-          </div>
-        
-        <form action="/updateprofil" method="POST">
-            @csrf
-        <div class="mb-3">
-            <label for="name" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <div class="mb-3">
-            <label for="phone" class="form-label">No Telepon</label>
-            <input type="tel" class="form-control" id="phone" name="phone" required>
-        </div>
-        <div class="mb-3">
-            <label for="about" class="form-label">Tentang kamu dan masakanmu</label>
-            <textarea class="form-control" id="about" name="about" rows="3"></textarea>
-        </div>
+    <div class="profile-edit-container" style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); width: 80%; margin: 2rem auto;">        
+        <form action="{{ route('profile.update') }}" method="POST">
+    @csrf
+    @method('PUT') <!-- Jika menggunakan method PUT -->
+    
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="nomor_telepon">Nomor Telepon</label>
+        <input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon" value="{{ $user->nomor_telepon }}" required>
+    <br>
+    </div>
         <button type="submit" class="btn btn-primary" style="background-color: #f44708; border: none;">Perbarui</button>
         <button type="button" class="btn btn-secondary" onclick="window.location.href='/profil'">Batal</button>
         </form>
@@ -332,24 +311,6 @@
       if (!event.target.closest('.nav-link') && !event.target.closest('#profilePopup')) {
         popup.style.display = 'none'; // Hide popup
       }
-    }
-
-    document.getElementById('uploadImage').addEventListener('change', function(event) {
-    if (event.target.files && event.target.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-        var previewImg = document.getElementById('imagePreview').querySelector('img');
-        previewImg.src = e.target.result;
-        previewImg.style.display = 'block'; // Show the image
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-    });
-
-    function removeImage() {
-    var previewImg = document.getElementById('imagePreview').querySelector('img');
-    previewImg.src = '';
-    previewImg.style.display = 'none'; // Hide the image
     }
 
   </script>

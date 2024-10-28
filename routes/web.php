@@ -58,9 +58,7 @@ Route::get('/admin', function () {
     return view('Admin/adminPage');
 });
 
-Route::get('/admin/user', function () {
-    return view('Admin/userPage');
-});
+Route::get('/admin/user', [UserController::class, 'index']);
 
 Route::get('/admin/resep', function () {
     return view('Admin/resepPage');
@@ -93,7 +91,11 @@ Route::get('/editprofil', function () {
 Route::get('/updateprofil', function () {
     return view('updateprofilPage');
 });
-Route::post('/updateprofil', 'ProfileController@update')->name('updateprofil');
+
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/editprofil', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//Route::post('/updateprofil',[ProfileController::class, 'update'] )->name('updateprofil');
 
 Route::post('/recipes', [RecipeController::class, 'store'])->name('recipe.store');
 

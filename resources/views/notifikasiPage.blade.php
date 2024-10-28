@@ -276,10 +276,10 @@
     <div class="d-flex align-items-center">
         <img src="{{ url('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"/>
         <div>
-            <a href="/profil">
-                <h5>Desri Dabukke</h5>
-            </a>
-            <p>desristenatalie@gmail.com</p>
+          <a href="/profil">
+              <strong>{{ Auth::user()->name }}</strong><br>
+          </a>
+          <small>{{ Auth::user()->email }}</small>
         </div>
     </div>
     <form action="{{ route('logout') }}" method="POST">
