@@ -9,8 +9,11 @@ class loginController extends Controller
 {
     public function postlogin(Request $request)
     {
-        // Coba autentikasi berdasarkan email dan password
-        if (Auth::attempt($request->only('email', 'password'))) {
+        // Coba autentikasi berdasarkan email, password, dan "remember"
+        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember'); // Cek apakah checkbox diaktifkan
+
+        if (Auth::attempt($credentials, $remember)) {
             $user = Auth::user(); // Ambil data pengguna yang sedang login
 
             // Cek role pengguna dan arahkan sesuai role
@@ -28,6 +31,8 @@ class loginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate(); // Hapus session
+        $request->session()->regenerateToken(); // Regenerasi token untuk keamanan
         return redirect('/login');
     }
 }

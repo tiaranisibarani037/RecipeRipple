@@ -30,7 +30,11 @@
           <input type="password" class="form-control" id="password" name="password" placeholder="**************" required>
           <i class="toggle-password bi bi-eye"></i>
         </div>
-        <br><br>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="remember" name="remember">
+          <label class="form-check-label" for="remember">Remember me</label>
+        </div>
+        <br>
         <div class="text-center">
           <button type="submit" class="btn btn-primary w-46" style="border-radius: 32px">Log in</button>
         </div>

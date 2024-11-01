@@ -269,15 +269,17 @@
             }
         };
 
-        // Chart initialization
+        // Data user registration
+        const userData = @json($userData);
+
         const userCtx = document.getElementById('userChart').getContext('2d');
         const userChart = new Chart(userCtx, {
             type: 'line',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: 'User Registration',
-                    data: [65, 59, 80, 81, 56, 55],
+                    data: userData,
                     fill: false,
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1
