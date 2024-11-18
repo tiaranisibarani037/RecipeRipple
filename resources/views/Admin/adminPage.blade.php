@@ -198,7 +198,7 @@
         <a class="active" href="/admin"><i class="fas fa-home"></i>Dashboard</a>
         <a href="admin/user"><i class="fas fa-user"></i>User</a>
         <a href="/admin/resep"><i class="fas fa-book"></i>Resep</a>
-        <a href="/admin/komentar"><i class="fas fa-comments"></i>Komentar</a>
+
     </div>
 
     <!-- Main Content -->

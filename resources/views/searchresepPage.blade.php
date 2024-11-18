@@ -248,7 +248,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-l5g">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="#">
             <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">

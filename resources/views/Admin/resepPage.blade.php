@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -191,7 +190,7 @@
             background-color: #ff6347;
         }
 
-        .btn-delete, .btn-edit, .btn-view {
+        .btn-delete, .btn-edit, .btn-view, .btn-approve {
             padding: 5px 10px;
             border: none;
             border-radius: 5px;
@@ -222,6 +221,14 @@
         .btn-view:hover {
             background-color: #2980b9;
         }
+
+        .btn-approve {
+            background-color: #f44708;
+        }
+
+        .btn-approve:hover {
+            background-color: #ff6347;
+        }
     </style>
 </head>
 <body>
@@ -234,7 +241,6 @@
         <a href="/admin"><i class="fas fa-home"></i>Dashboard</a>
         <a href="/admin/user"><i class="fas fa-user"></i>User</a>
         <a class="active" href="/admin/resep"><i class="fas fa-book"></i>Resep</a>
-        <a href="/admin/komentar"><i class="fas fa-comments"></i>Komentar</a>
     </div>
 
     <!-- Main Content -->
@@ -254,20 +260,34 @@
         <table class="recipe-table">
             <thead>
                 <tr>
-                    <th>Foto</th>
+                    <th>No</th>
                     <th>Nama Resep</th>
-                    <th>Kategori</th>
                     <th>Deskripsi</th>
+                    <th>Komentar</th>
+                    <th>Rating</th>
+                    <th>Status</th>
+                    <th>Approval</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Contoh Data Resep -->
                 <tr>
-                    <td><img src="{{ url('../frontend/images/nasigoreng.png') }}" alt="Recipe Image"></td>
+                    <td>1</td>
                     <td>Nasi Goreng</td>
-                    <td>Main Course</td>
                     <td>Nasi goreng lezat dengan bumbu spesial</td>
+                    <td>Enak sekali!</td>
+                    <td>4.5</td>
+                    <td>
+                        <select class="form-select form-select-sm">
+                            <option selected>Setujui</option>
+                            <option>Belum</option>
+                            <option>Tidak Setujui</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn-approve">Approve</button>
+                    </td>
                     <td>
                         <button class="btn-view" onclick="viewRecipe()">Lihat</button>
                         <button class="btn-edit" onclick="editRecipe()">Edit</button>
