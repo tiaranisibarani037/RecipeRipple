@@ -3,6 +3,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Recipe Ripple</title>
+    <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
@@ -138,6 +139,35 @@
             justify-content: center;
             margin: 2rem 0;
         }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #f15a22; /* Warna oranye */
+            border-radius: 20px;
+            padding: 5px 15px;
+            width: 300px; /* Sesuaikan lebar */
+        }
+
+        .search-container i {
+            color: white; /* Warna ikon */
+            font-size: 16px;
+            margin-right: 10px; /* Jarak antara ikon dan input */
+        }
+
+        .search-container input {
+            border: none;
+            background: transparent;
+            outline: none;
+            color: white; /* Warna teks */
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .search-container input::placeholder {
+            color: rgba(255, 255, 255, 0.7); /* Warna placeholder */
+        }
+
         .search-bar input {
             width: 50%;
             border-radius: 40px;
@@ -292,71 +322,82 @@
 
     <div class="container">
         <div class="text-center">
-        <h1 class="my-4" style="font-weight: bold;">
-            <img alt="Logo" class="me-2" height="50" src="{{url('frontend/images/logo.png')}}" width="50"/>
-            Recipe <span style="color: #FF4500;">Ripple</span>
-        </h1>
+            <h1 class="my-4" style="font-weight: bold;">
+                <img alt="Logo" class="me-2" height="50" src="{{url('frontend/images/logo.png')}}" width="50"/>
+                Recipe <span style="color: #FF4500;">Ripple</span>
+            </h1>
         </div>
-        <div class="search-bar" style="position: relative;">
-            <input type="text" class="form-control btn-danger" placeholder="Search.." style="border-radius: 25px; padding-left: 30px; color: white; background-color: #FF4500; border: none;">
-            <i class="bi bi-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: white; pointer-events: none;"></i>
-        </div>
-
-
+        <form action="/search" method="GET" class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" name="query" placeholder="Search.." required />
+            <button type="submit" style="display: none;"></button>
+        </form>
+        <br>
 
         <div class="row">
             <div class="col-md-6 col-lg-3 mb-4">
-                <div class="card">
-                    <img alt="Nasi Goreng Kampung" class="card-img-top" height="200" src="{{url('frontend/images/nasi_goreng_kampug.png')}}" width="300"/>
-                    <div class="card-body">
-                        <h5 class="card-title">Resep Nasi Goreng Kampung, Lezat, Gampang</h5>
-                        <p class="card-text">
-                            <span><i class="fas fa-star"></i> 3.8</span>
-                            <span><i class="fas fa-user"></i></span>
-                        </p>
+                <a href="{{url('resep/nasi-goreng-kampung')}}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img alt="Nasi Goreng Kampung" class="card-img-top" height="200" src="{{url('frontend/images/nasi_goreng_kampug.png')}}" width="300"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Resep Nasi Goreng Kampung, Lezat, Gampang</h5>
+                            <p class="card-text">
+                                <span><i class="fas fa-star"></i> 3.8</span>
+                                <span><i class="fas fa-user"></i></span>
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-6 col-lg-3 mb-4">
-                <div class="card">
-                    <img alt="Nasi Goreng Pedas Gila" class="card-img-top" height="200"  src="{{url('frontend/images/Nasi_Goreng_Pedas.png')}}"  width="300"/>
-                    <div class="card-body">
-                        <h5 class="card-title">Resep Nasi Goreng Pedas Gila, Sederhana</h5>
-                        <p class="card-text">
-                            <span><i class="fas fa-star"></i> 4.6</span>
-                            <span><i class="fas fa-user"></i></span>
-                        </p>
+                <a href="{{url('resep/nasi-goreng-pedas-gila')}}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img alt="Nasi Goreng Pedas Gila" class="card-img-top" height="200" src="{{url('frontend/images/Nasi_Goreng_Pedas.png')}}" width="300"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Resep Nasi Goreng Pedas Gila, Sederhana</h5>
+                            <p class="card-text">
+                                <span><i class="fas fa-star"></i> 4.6</span>
+                                <span><i class="fas fa-user"></i></span>
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-6 col-lg-3 mb-4">
-                <div class="card">
-                    <img alt="Nasi Goreng Kambing" class="card-img-top" height="200" src="{{url('frontend/images/Nasi_Goreng_Kambing.png')}}"  width="300"/>
-                    <div class="card-body">
-                        <h5 class="card-title">Resep Nasi Goreng Kambing, Rasa Mantap Daging Empuk</h5>
-                        <p class="card-text">
-                            <span><i class="fas fa-star"></i> 4.8</span>
-                            <span><i class="fas fa-user"></i></span>
-                        </p>
+                <a href="{{url('resep/nasi-goreng-kambing')}}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img alt="Nasi Goreng Kambing" class="card-img-top" height="200" src="{{url('frontend/images/Nasi_Goreng_Kambing.png')}}" width="300"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Resep Nasi Goreng Kambing, Rasa Mantap Daging Empuk</h5>
+                            <p class="card-text">
+                                <span><i class="fas fa-star"></i> 4.8</span>
+                                <span><i class="fas fa-user"></i></span>
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-6 col-lg-3 mb-4">
-                <div class="card">
-                    <img alt="Nasi Goreng Spesial" class="card-img-top" height="200" src="{{url('frontend/images/Nasi_Goreng_Spesial.png')}}"  width="300"/>
-                    <div class="card-body">
-                        <h5 class="card-title">Resep Nasi Goreng Spesial ala Restoran Mewah</h5>
-                        <p class="card-text">
-                            <span><i class="fas fa-star"></i> 5.0</span>
-                            <span><i class="fas fa-user"></i></span>
-                        </p>
+                <a href="{{url('resep/nasi-goreng-spesial')}}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img alt="Nasi Goreng Spesial" class="card-img-top" height="200" src="{{url('frontend/images/Nasi_Goreng_Spesial.png')}}" width="300"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Resep Nasi Goreng Spesial ala Restoran Mewah</h5>
+                            <p class="card-text">
+                                <span><i class="fas fa-star"></i> 5.0</span>
+                                <span><i class="fas fa-user"></i></span>
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
         <div class="load-more">
-            <button>Tampilkan lebih banyak</button>
+            <button id="loadMoreButton">Tampilkan lebih banyak</button>
         </div>
+    </div>
+
+
     </div>
     <div class="about-container">
       <h2>About Us</h2>
@@ -392,6 +433,64 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    document.getElementById('loadMoreButton').addEventListener('click', function() {
+    // Contoh konten baru yang akan ditambahkan (4 menu baru)
+    const newContent = `
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card">
+                <img alt="Resep bakso kampung mie keriting" class="card-img-top" height="200" src="{{url('frontend/images/mie keriting.png')}}" width="300"/>
+                <div class="card-body">
+                    <h5 class="card-title">Resep bakso kampung mie keriting</h5>
+                    <p class="card-text">
+                        <span><i class="fas fa-star"></i> 3.8</span>
+                        <span><i class="fas fa-user"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card">
+                <img alt="Resep Risol Mayonise " class="card-img-top" height="200" src="{{url('frontend/images/risol.png')}}" width="300"/>
+                <div class="card-body">
+                    <h5 class="card-title">Resep Risol Mayonise </h5>
+                    <p class="card-text">
+                        <span><i class="fas fa-star"></i> 4.5</span>
+                        <span><i class="fas fa-user"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card">
+                <img alt="Resep Lupis Ketan Gula Merah" class="card-img-top" height="200" src="{{url('frontend/images/lupis.png')}}" width="300"/>
+                <div class="card-body">
+                    <h5 class="card-title">Resep Lupis Ketan Gula Merah</h5>
+                    <p class="card-text">
+                        <span><i class="fas fa-star"></i> 4.7</span>
+                        <span><i class="fas fa-user"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card">
+                <img alt="Resep Klepon Isi Gula Merah gurih dan kenyal" class="card-img-top" height="200" src="{{url('frontend/images/klepon.png')}}" width="300"/>
+                <div class="card-body">
+                    <h5 class="card-title">Resep Klepon Isi Gula Merah gurih dan kenyal</h5>
+                    <p class="card-text">
+                        <span><i class="fas fa-star"></i> 4.0</span>
+                        <span><i class="fas fa-user"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Menambahkan konten baru ke dalam container resep
+    const recipeContainer = document.querySelector('.row');
+    recipeContainer.insertAdjacentHTML('beforeend', newContent);
+});
+
     function toggleProfilePopup() {
       const popup = document.getElementById('profilePopup');
       popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
