@@ -39,7 +39,8 @@ class UserController extends Controller
     }
 
     // Mengupdate data pengguna yang ada
-    public function update(Request $request, $id) 
+    public function update(Request $request, $id)
+    
     {
         $user = User::findOrFail($id);
 
