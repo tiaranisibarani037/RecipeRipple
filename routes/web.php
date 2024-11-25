@@ -57,7 +57,20 @@ Route::get('/beranda', function () {
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
+// Route bagian Admin User
 Route::get('/admin/user', [UserController::class, 'index']);
+// Route untuk menampilkan halaman daftar pengguna
+Route::get('/admin/user', [UserController::class, 'index'])->name('user.index');
+
+// Route untuk menyimpan pengguna baru
+Route::post('/admin/user/store', [UserController::class, 'store'])->name('user.store');
+
+// Route untuk memperbarui data pengguna yang ada
+Route::put('/admin/user/{id}', [UserController::class, 'update'])->name('user.update');
+
+// Route untuk menghapus pengguna
+Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
 
 Route::get('/admin/resep', function () {
     return view('Admin/resepPage');
@@ -111,6 +124,7 @@ Route::get('/recipes', function () {
 Route::get('/searchresep', function () {
     return view('searchresepPage');
 });
+
 
 Route::get('/pencarian', function () {
     return view('pencarianresepPage');

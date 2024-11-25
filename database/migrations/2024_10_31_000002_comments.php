@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('comment_text');
-            // $table->integer('comment_quantity')->default(0);
+            $table->timestamp('comment_date')->useCurrent();
+            $table->integer('comment_quantity')->default(0);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->boolean('isRead')->default(false);
-            // $table->foreignId('recipe_id')->constrained('recipes')->onDelete('cascade');
+            $table->foreignId('recipe_id')->constrained('recipes')->onDelete('cascade');
             $table->timestamps();
         });
     }
