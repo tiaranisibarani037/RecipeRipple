@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Recipe Ripple | Notifikasi</title>
   <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
-  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
   <style>
     body {
       background-color: #fdf6e3;
@@ -50,8 +51,9 @@
       margin-bottom: 2rem;
     }
 
-    .notification-card {
+    .notification-card-unread {
       background-color: #550527;
+      /* B8405E */
       color: white;
       padding: 1.5rem;
       border-radius: 10px;
@@ -60,28 +62,56 @@
       align-items: center;
     }
 
-    .notification-card i {
+    .notification-card-unread i {
       font-size: 2rem;
       margin-right: 1rem;
     }
 
-    .notification-card .content {
+    .notification-card-unread .content {
       text-align: left;
     }
 
-    .notification-card .content p {
+    .notification-card-unread .content p {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .notification-card-read {
+      background-color: #A25B5B;
+      color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .notification-card-read i {
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+
+    .notification-card-read .content {
+      text-align: left;
+    }
+
+    .notification-card-read .content p {
       margin: 0;
       font-weight: bold;
     }
 
     .about-container {
-      background-color: #550527; /* Dark red background */
-      color: white; /* White text color */
+      background-color: #550527;
+      /* Dark red background */
+      color: white;
+      /* White text color */
       padding: 1.5rem;
       font-family: 'Montserrat', sans-serif;
-      border-radius: 10px; /* Rounded corners */
+      border-radius: 10px;
+      /* Rounded corners */
       margin-top: 2rem;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      /* Subtle shadow */
     }
 
     .social-icon {
@@ -93,11 +123,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 20px; /* Spacing of 20px between icons */
+      margin-right: 20px;
+      /* Spacing of 20px between icons */
     }
 
     .social-icon:last-child {
-      margin-right: 0; /* No margin on the last icon */
+      margin-right: 0;
+      /* No margin on the last icon */
     }
 
     .social-icon:hover {
@@ -110,24 +142,33 @@
     }
 
     .social-icons-container {
-      display: flex; /* Display icons in a row */
-      align-items: center; /* Center icons vertically */
+      display: flex;
+      /* Display icons in a row */
+      align-items: center;
+      /* Center icons vertically */
     }
 
     /* Popup Styles */
     .profile-popup {
-      display: none; /* Hidden by default */
-      position: absolute; /* Positioning it absolutely */
-      top: 60px; /* Adjust this value based on navbar height */
-      right: 20px; /* Adjust to fit within the page */
+      display: none;
+      /* Hidden by default */
+      position: absolute;
+      /* Positioning it absolutely */
+      top: 60px;
+      /* Adjust this value based on navbar height */
+      right: 20px;
+      /* Adjust to fit within the page */
       background-color: white;
       border: 1px solid #ccc;
       border-radius: 5px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      z-index: 1000; /* Ensures it appears above other elements */
+      z-index: 1000;
+      /* Ensures it appears above other elements */
       padding: 1rem;
-      min-width: 120px; /* Minimum width to prevent it from being too small */
-      width: auto; /* Allow the width to adjust based on content */
+      min-width: 120px;
+      /* Minimum width to prevent it from being too small */
+      width: auto;
+      /* Allow the width to adjust based on content */
     }
 
     .profile-popup img {
@@ -191,55 +232,98 @@
 
 <body>
   <nav class="navbar navbar-expand-lg">
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center" href="#">
-          <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
-          Recipe <span style="color: #F44708;">Ripple</span>
-      </a>
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
+      Recipe <span style="color: #F44708;">Ripple</span>
+    </a>
 
-      <!-- Toggler for mobile view -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
+    <!-- Toggler for mobile view -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <!-- Navigation Links -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                  <a class="nav-link" href="/beranda" style="display: flex; flex-direction: column; align-items: center;">
-                      <i class="fas fa-home"></i>
-                      Beranda
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="searchresep" style="display: flex; flex-direction: column; align-items: center;">
-                      <i class="fas fa-search"></i>
-                      Cari
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;">
-                      <i class="fas fa-pen"></i>
-                      Tulis
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link active" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center; color:#F44708">
-                      <i class="fas fa-bell"></i>
-                      Notifikasi
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
-                      <img src="{{ ('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle me-2" width="30" height="30"/>
-                      <span>Profil</span>
-                  </a>
-              </li>
-          </ul>
-      </div>
+    <!-- Navigation Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/beranda" style="display: flex; flex-direction: column; align-items: center;">
+            <i class="fas fa-home"></i>
+            Beranda
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="searchresep" style="display: flex; flex-direction: column; align-items: center;">
+            <i class="fas fa-search"></i>
+            Cari
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;">
+            <i class="fas fa-pen"></i>
+            Tulis
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center; color:#F44708">
+            <i class="fas fa-bell"></i>
+            @if($counts > 0)
+            Notifikasi ({{ $counts }})
+            @elseif($counts == 0)
+            Notifikasi
+            @endif
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
+            <img src="{{ ('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle me-2" width="30" height="30" />
+            <span>Profil</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </nav>
 
   <div class="container notification-container">
+    <div class="row">
+      <h1>Notifikasi</h1>
+      <div class="col-12">
+        <p class="col-12 text-start" style="font-family: 'Montserrat', sans-serif">Belum dibaca</p>
+        @if($unreads->isEmpty())
+        <!-- Tampilkan pesan jika tidak ada komentar yang belum dibaca -->
+        <p class="text-muted">Semua pesan sudah dibaca</p>
+        @else
+        <!-- Tampilkan daftar komentar yang belum dibaca -->
+        @foreach($unreads as $unread)
+        <form action="{{ route('comments.read', $unread->id) }}" method="POST" style="margin: 0; padding: 0;">
+          @csrf
+          <button type="submit" style="width: 100%;" class="notification-card-unread">
+            <i class="fas fa-user-circle"></i>
+            <div class="content">
+              <p>[{{ $unread->user->name }}] meninggalkan komentar di postingan Anda</p>
+              <small>{{ $unread->comment_text }}</small>
+            </div>
+          </button>
+        </form>
+        @endforeach
+        @endif
+
+        <p class="col-12 text-start" style="font-family: 'Montserrat', sans-serif">Dibaca</p>
+        @foreach($reads as $read)
+        <form action="{{ route('comments.readed') }}" method="GET" style="margin: 0; padding: 0;">
+          <button type="submit" class="notification-card-read" style="width: 100%; border: none; text-align: left;">
+            <i class="fas fa-user-circle"></i>
+            <div class="content">
+              <p>[{{ $read->user->name }}] meninggalkan komentar di postingan Anda</p>
+              <small>{{ $read->comment_text }}</small>
+            </div>
+          </button>
+        </form>
+        @endforeach
+      </div>
+    </div>
+  </div>
+  <!-- <div class="container notification-container">
     <h1>Notifikasi</h1>
 
     <div class="notification-card">
@@ -256,37 +340,37 @@
         <p>[Bai**] menyukai postingan Anda.</p>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="about-container">
-      <h2>About Us</h2>
-      <p>At RecipeRipple, we believe that cooking connects people. Our platform allows food lovers to discover, share, and enjoy recipes from around the world. Whether you’re a beginner or an experienced cook, we provide an easy way to explore new dishes, upload your own creations, and engage with a vibrant community.</p>
-      <p>Join us in spreading the joy of cooking, one recipe at a time!</p>
-      <h2>Contact</h2>
-      <div class="social-icons-container">
-          <a class="social-icon" href="#"><i class="fab fa-facebook"></i></a>
-          <a class="social-icon" href="#"><i class="fab fa-instagram"></i></a>
-          <a class="social-icon" href="#"><i class="fab fa-twitter"></i></a>
-          <a class="social-icon" href="#"><i class="fas fa-phone"></i></a>
-      </div>
+    <h2>About Us</h2>
+    <p>At RecipeRipple, we believe that cooking connects people. Our platform allows food lovers to discover, share, and enjoy recipes from around the world. Whether you’re a beginner or an experienced cook, we provide an easy way to explore new dishes, upload your own creations, and engage with a vibrant community.</p>
+    <p>Join us in spreading the joy of cooking, one recipe at a time!</p>
+    <h2>Contact</h2>
+    <div class="social-icons-container">
+      <a class="social-icon" href="#"><i class="fab fa-facebook"></i></a>
+      <a class="social-icon" href="#"><i class="fab fa-instagram"></i></a>
+      <a class="social-icon" href="#"><i class="fab fa-twitter"></i></a>
+      <a class="social-icon" href="#"><i class="fas fa-phone"></i></a>
+    </div>
   </div>
 
   <!-- Profile Popup -->
   <div class="profile-popup" id="profilePopup">
     <div class="d-flex align-items-center">
-        <img src="{{ url('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"/>
-        <div>
-          <a href="/profil">
-              <strong>{{ Auth::user()->name }}</strong><br>
-          </a>
-          <small>{{ Auth::user()->email }}</small>
-        </div>
+      <img src="{{ url('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle" />
+      <div>
+        <a href="/profil">
+          <strong>{{ Auth::user()->name }}</strong><br>
+        </a>
+        <small>{{ Auth::user()->email }}</small>
+      </div>
     </div>
     <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" style="width: 100%; background-color: #f44708; color: white; border: none; border-radius: 5px; padding: 0.5rem; cursor: pointer;">
-            Keluar
-        </button>
+      @csrf
+      <button type="submit" style="width: 100%; background-color: #f44708; color: white; border: none; border-radius: 5px; padding: 0.5rem; cursor: pointer;">
+        Keluar
+      </button>
     </form>
   </div>
 
@@ -312,4 +396,5 @@
     }
   </script>
 </body>
+
 </html>

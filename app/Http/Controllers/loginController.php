@@ -10,9 +10,12 @@ class loginController extends Controller
     public function postlogin(Request $request)
     {
         // Coba autentikasi berdasarkan email, password, dan "remember"
+        // $test = User::all()->get();
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember'); // Cek apakah checkbox diaktifkan
-
+        // dd($credentials);
+        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember'); // Cek apakah checkbox diaktifkan
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::user(); // Ambil data pengguna yang sedang login
 

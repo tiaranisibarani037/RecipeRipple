@@ -270,7 +270,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="display: flex; flex-direction: column; align-items: center; color: #F44708;">
+                    <a class="nav-link" href="pencarian" style="display: flex; flex-direction: column; align-items: center; color: #F44708;">
                         <i class="fas fa-search"></i>
                         Cari
                     </a>
@@ -392,7 +392,7 @@
             {
                 href: "/resep/nasi-goreng-ayam",
                 imgSrc: "{{url('frontend/images/Nasi_Goreng_Ayam.png')}}",
-                imgAlt: "Nasi Goreng Ayam", 
+                imgAlt: "Nasi Goreng Ayam",
                 title: "Resep Nasi Goreng Ayam, Gurih dan Lezat",
                 rating: 4.6,
             },
@@ -406,9 +406,9 @@
             },
         ];
 
-        let recipesDisplayed = false; 
+        let recipesDisplayed = false;
         document.getElementById("loadMoreButton").addEventListener("click", function() {
-        if (!recipesDisplayed) { 
+        if (!recipesDisplayed) {
             const container = document.querySelector(".row");
             moreRecipes.forEach(recipe => {
                 const col = document.createElement("div");
@@ -429,8 +429,8 @@
                 `;
                 container.appendChild(col);
             });
-            recipesDisplayed = true; 
-            this.style.display = 'none'; 
+            recipesDisplayed = true;
+            this.style.display = 'none';
         }
         });
         </script>
@@ -475,6 +475,15 @@
             popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
         }
 
+    // Hide popup when clicking outside
+    window.onclick = function(event) {
+      const popup = document.getElementById('profilePopup');
+      if (!event.target.closest('.nav-link') && !event.target.closest('#profilePopup')) {
+        popup.style.display = 'none'; // Hide popup
+      }
+    }
+  </script>
+   <script>
         function logout() {
             alert("Logout clicked!");
         }
@@ -482,7 +491,7 @@
         window.onclick = function(event) {
             const popup = document.getElementById('profilePopup');
             if (!event.target.closest('.nav-link') && !event.target.closest('#profilePopup')) {
-                popup.style.display = 'none';
+            popup.style.display = 'none';
             }
         }
     </script>
