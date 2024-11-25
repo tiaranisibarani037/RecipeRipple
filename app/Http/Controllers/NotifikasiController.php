@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 
 
 class NotifikasiController extends Controller
