@@ -4,8 +4,8 @@
 <head>
   <title>Recipe Ripple | Notifikasi</title>
   <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
-  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
     body {
       background-color: #fdf6e3;
@@ -232,56 +232,56 @@
 
 <body>
   <nav class="navbar navbar-expand-lg">
-    <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center" href="#">
-      <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
-      Recipe <span style="color: #F44708;">Ripple</span>
-    </a>
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
+          Recipe <span style="color: #F44708;">Ripple</span>
+      </a>
 
-    <!-- Toggler for mobile view -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <!-- Toggler for mobile view -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <!-- Navigation Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/beranda" style="display: flex; flex-direction: column; align-items: center;">
-            <i class="fas fa-home"></i>
-            Beranda
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="searchresep" style="display: flex; flex-direction: column; align-items: center;">
-            <i class="fas fa-search"></i>
-            Cari
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;">
-            <i class="fas fa-pen"></i>
-            Tulis
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center; color:#F44708">
-            <i class="fas fa-bell"></i>
-            @if($counts > 0)
-            Notifikasi ({{ $counts }})
-            @elseif($counts == 0)
-            Notifikasi
-            @endif
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
-            <img src="{{ ('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle me-2" width="30" height="30" />
-            <span>Profil</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+      <!-- Navigation Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="/beranda" style="display: flex; flex-direction: column; align-items: center;">
+                      <i class="fas fa-home"></i>
+                      Beranda
+                  </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="searchresep" style="display: flex; flex-direction: column; align-items: center;">
+                    <i class="fas fa-book"></i>
+                    Resep
+                </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;">
+                      <i class="fas fa-pen"></i>
+                      Tulis
+                  </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center; color:#F44708">
+                  <i class="fas fa-bell"></i>
+                  @if($counts > 0)
+                  Notifikasi ({{ $counts }})
+                  @elseif($counts == 0)
+                  Notifikasi
+                  @endif
+                </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
+                      <img src="{{ ('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle me-2" width="30" height="30"/>
+                      <span>Profil</span>
+                  </a>
+              </li>
+          </ul>
+      </div>
   </nav>
 
   <div class="container notification-container">

@@ -3,6 +3,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Recipe Ripple</title>
+    <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
@@ -182,6 +183,11 @@
             color: #333;
         }
 
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: scale(1.02);
+            transition: all 0.3s ease-in-out;
+        }
         .load-more {
             display: flex;
             justify-content: center;
@@ -270,9 +276,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pencarian" style="display: flex; flex-direction: column; align-items: center; color: #F44708;">
-                        <i class="fas fa-search"></i>
-                        Cari
+                    <a class="nav-link active" href="#" style="display: flex; flex-direction: column; align-items: center; color: #F44708;">
+                        <i class="fas fa-book"></i>
+                        Resep
                     </a>
                 </li>
                 <li class="nav-item">
@@ -305,14 +311,17 @@
                 Recipe <span style="color: #FF4500;">Ripple</span>
             </h1>
         </div>
-        <div class="search-bar" style="position: relative;">
-            <input type="text" class="form-control btn-danger" placeholder="Search.." style="border-radius: 25px; padding-left: 30px; color: white; background-color: #FF4500; border: none;">
-            <i class="bi bi-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: white; pointer-events: none;"></i>
-        </div>
+        {{-- <div class="search-bar" style="position: relative;">
+            <form action="{{ route('resep.search') }}" method="get">
+                <input type="text" name="query" class="form-control btn-danger" placeholder="Search.." style="border-radius: 25px; padding-left: 30px; color: white; background-color: #FF4500; border: none; width: 100%; max-width: 1000px;">
+                <i class="bi bi-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: white; pointer-events: none;"></i>
+            </form>
+        </div> --}}
+        
 
         <div class="row">
             <div class="col-md-6 col-lg-3 mb-4">
-                <a href="/resep/nasi-goreng-kampung" class="text-decoration-none">
+                <a href="/resep" class="text-decoration-none text-dark">
                     <div class="card">
                         <img alt="Nasi Goreng Kampung" class="card-img-top" height="200" src="{{url('frontend/images/nasi_goreng_kampug.png')}}" width="300"/>
                         <div class="card-body">
@@ -434,7 +443,7 @@
         }
         });
         </script>
-
+        
     </div>
     <div class="about-container">
         <h2>About Us</h2>

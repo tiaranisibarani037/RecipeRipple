@@ -162,7 +162,28 @@
             line-height: 1.6;
             font-weight: bold;
         }
+        .rating-container {
+            display: flex;
+            flex-direction: column; /* Atur menjadi kolom agar teks berada di atas bintang */
+            align-items: flex-start; /* Rata kiri */
+        }
 
+        .star-rating {
+            display: flex;
+            gap: 5px;
+        }
+
+        .star-rating i {
+            font-size: 1.5rem;
+            color: #ccc; /* Warna default bintang */
+            cursor: pointer;
+        }
+
+        .star-rating i.selected,
+        .star-rating i:hover,
+        .star-rating i:hover ~ i {
+            color: #FF4500; /* Warna bintang saat dipilih atau di-hover */
+        }
         .comment-section {
             max-width: 600px;
             margin: 2rem auto;
@@ -473,9 +494,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#" style="display: flex; flex-direction: column; align-items: center; color:#F44708">
-                        <i class="fas fa-search"></i>
-                        Cari
+                    <a class="nav-link active" href="searchresep" style="display: flex; flex-direction: column; align-items: center; color:#F44708"">
+                        <i class="fas fa-book"></i>
+                        Resep
                     </a>
                 </li>
                 <li class="nav-item">
@@ -508,6 +529,18 @@
         <div class="video-placeholder">
             <iframe class="responsive-iframe" src="https://www.youtube.com/embed/WWq7En1CZu4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+
+        <div class="rating-container" style="margin: 1rem 0;">
+            <p class="section-title" style="font-size: 1.2rem; margin-bottom: 0.5rem;">Beri Rating</p>
+            <div class="star-rating">
+                <i class="fas fa-star" data-rating="1"></i>
+                <i class="fas fa-star" data-rating="2"></i>
+                <i class="fas fa-star" data-rating="3"></i>
+                <i class="fas fa-star" data-rating="4"></i>
+                <i class="fas fa-star" data-rating="5"></i>
+            </div>
+        </div>        
+
         <div class="title-container" style="margin-bottom: 10px;">
             Nasi Goreng Kampung kari dengan ikan teri dan Pete (bumbu instant)
         </div>
@@ -515,7 +548,6 @@
         <div class="text-container" style="margin-bottom: 10px;">
             Nasi goreng kari ini dimasak dengan bumbu nasi goreng kampung munik dan diberi bubuk kari dan daun kari. Rasa otentik dari bumbu munik ditambah bubuk kari serta tambahan teri dan Pete, memberi sensasi makan yg luar biasa. Yuks kita coba...
         </div>
-
         <p class="section-title">Bahan-bahan</p>
         <div class="text-container" style="margin-bottom: 10px;">
             <p>2 Piring nasi</p>
@@ -744,6 +776,34 @@
                 popup.style.display = 'none'; // Hide popup
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const stars = document.querySelectorAll('.star-rating i');
+            let currentRating = 0;
+
+            stars.forEach(star => {
+                star.addEventListener('click', function () {
+                    currentRating = parseInt(this.getAttribute('data-rating'));
+                    stars.forEach((s, index) => {
+                        s.classList.toggle('selected', index < currentRating);
+                    });
+                });
+
+                star.addEventListener('mouseover', function () {
+                    const hoverRating = parseInt(this.getAttribute('data-rating'));
+                    stars.forEach((s, index) => {
+                        s.classList.toggle('selected', index < hoverRating);
+                    });
+                });
+
+                star.addEventListener('mouseout', function () {
+                    stars.forEach((s, index) => {
+                        s.classList.toggle('selected', index < currentRating);
+                    });
+                });
+            });
+        });
+
     </script>
 </body>
 

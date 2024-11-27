@@ -145,5 +145,21 @@ class RecipeController extends Controller
             Log::error('Error searching recipes: ' . $e->getMessage());
             return back()->withErrors(['error' => 'Failed to perform search.']);
         }
+
+    }
+
+    // Menangani pencarian resep
+    public function search(Request $request)
+    {
+        // Ambil input pencarian
+        $query = $request->input('query');
+
+        // Cari resep berdasarkan judul atau deskripsi
+        $recipes = Recipe::where('title', 'like', "%$query%")
+                        ->orWhere('description', 'like', "%$query%")
+                        ->get();
+
+        // Kembalikan ke view hasil pencarian
+        return view('search-results', compact('recipes', 'query'));
     }
 }
