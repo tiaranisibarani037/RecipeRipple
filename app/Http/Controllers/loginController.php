@@ -20,6 +20,15 @@ class LoginController extends Controller
 
         // Coba login menggunakan kredensial
         if (Auth::attempt($credentials)) {
+        // Coba autentikasi berdasarkan email, password, dan "remember"
+        // $test = User::all()->get();
+        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember'); // Cek apakah checkbox diaktifkan
+        // dd($credentials);
+        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember'); // Cek apakah checkbox diaktifkan
+        if (Auth::attempt($credentials, $remember)) {
+
             $user = Auth::user(); // Ambil data pengguna yang sedang login
 
             // Cek role pengguna dan arahkan sesuai role
