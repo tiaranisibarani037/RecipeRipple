@@ -205,6 +205,7 @@
         padding: 2rem;
       }
     }
+    
   </style>
 </head>
 
@@ -231,9 +232,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="searchresep" style="display: flex; flex-direction: column; align-items: center;">
-                    <i class="fas fa-search"></i>
-                    Cari
+                <a class="nav-link active" href="searchresep" style="display: flex; flex-direction: column; align-items: center; color:#F44708"">
+                    <i class="fas fa-book"></i>
+                    Resep
                 </a>
             </li>
             <li class="nav-item">

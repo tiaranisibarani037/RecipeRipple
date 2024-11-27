@@ -5,6 +5,7 @@
   <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
   <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
   <style>
     body {
       background-color: #fdf6e3;
@@ -212,10 +213,10 @@
                   </a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="searchresep" style="display: flex; flex-direction: column; align-items: center;">
-                      <i class="fas fa-search"></i>
-                      Cari
-                  </a>
+                <a class="nav-link" href="searchresep" style="display: flex; flex-direction: column; align-items: center;">
+                    <i class="fas fa-book"></i>
+                    Resep
+                </a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;">

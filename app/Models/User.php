@@ -16,7 +16,10 @@ class User extends Authenticatable
         'email', 
         'nomor_telepon',
         'password',  
-        'profile_image' // Kolom tambahan jika ada
+        'profile_image', // Kolom tambahan jika ada
+        'google_id',
+        'google_token',
+        'google_refresh_token'
     ];
 
     protected $hidden = [

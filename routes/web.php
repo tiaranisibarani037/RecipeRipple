@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +29,8 @@ Route::get('/login', function () {
 })->name('login');
 
 // Route untuk registrasi
-Route::get('/signup', [signupController::class, 'index']); 
-Route::post('/signup', [signupController::class, 'store']);
+Route::get('signup', [SignupController::class, 'index'])->name('register'); // Halaman registrasi
+Route::post('signup', [SignupController::class, 'store']); // Proses registrasi
 
 // Route untuk proses login dan logout
 Route::post('postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
@@ -44,6 +45,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/beranda', [UserController::class, 'dashboard'])->name('berandaPage');
 });
+
+// Halaman Beranda setelah login
+Route::get('/beranda', [HomeController::class, 'index'])->middleware('auth');
+
+// Halaman khusus untuk admin
+Route::get('/admin', [AdminController::class, 'index'])
+    ->middleware(['auth', 'role:admin']); // Hanya bisa diakses oleh admin
+
+// Halaman khusus untuk user
+Route::get('/user', [UserController::class, 'index'])
+    ->middleware(['auth', 'role:user']); // Hanya bisa diakses oleh user
 
 Route::get('/', function () {
     return view('HomePage');
@@ -117,3 +129,12 @@ Route::get('/recipes', function () {
 Route::get('/searchresep', function () {
     return view('searchresepPage');
 });
+
+Route::get('/resep/cari', [RecipeController::class, 'search'])->name('resep.search');
+
+Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
+
+Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);
+// Fungsi untuk login dengan Google
+Route::get('login/google', [LoginController::class, 'redirectToGoogle']);
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);

@@ -7,13 +7,35 @@ use App\Models\Recipe;
 
 class RecipeController extends Controller
 {
+    // Menyimpan data resep baru
     public function store(Request $request)
     {
-        // Validation and saving logic here
+        // Validasi input
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image_url' => 'required|url',
+            'slug' => 'required|string|unique:recipes,slug',
+        ]);
 
-        // Example:
+        // Simpan data ke database
         $recipe = Recipe::create($request->all());
-        
+
         return redirect()->route('recipe.index')->with('success', 'Recipe added successfully!');
+    }
+
+    // Menangani pencarian resep
+    public function search(Request $request)
+    {
+        // Ambil input pencarian
+        $query = $request->input('query');
+
+        // Cari resep berdasarkan judul atau deskripsi
+        $recipes = Recipe::where('title', 'like', "%$query%")
+                        ->orWhere('description', 'like', "%$query%")
+                        ->get();
+
+        // Kembalikan ke view hasil pencarian
+        return view('search-results', compact('recipes', 'query'));
     }
 }
