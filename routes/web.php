@@ -93,9 +93,6 @@ Route::get('/admin/resep', function () {
     return view('Admin/resepPage');
 });
 
-Route::get('/admin/komentar', function () {
-    return view('Admin/komentarPage');
-});
 
 Route::get('/writeresep', function () {
     return view('writeResepPage');
