@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>Recipe</title>
-    <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
+    <title>{{ $recipe->name }}</title>
+    <link rel="shortcut icon" type="x-icon" href="{{ url('frontend/images/Logo.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
@@ -162,10 +163,13 @@
             line-height: 1.6;
             font-weight: bold;
         }
+
         .rating-container {
             display: flex;
-            flex-direction: column; /* Atur menjadi kolom agar teks berada di atas bintang */
-            align-items: flex-start; /* Rata kiri */
+            flex-direction: column;
+            /* Atur menjadi kolom agar teks berada di atas bintang */
+            align-items: flex-start;
+            /* Rata kiri */
         }
 
         .star-rating {
@@ -175,102 +179,85 @@
 
         .star-rating i {
             font-size: 1.5rem;
-            color: #ccc; /* Warna default bintang */
+            color: #ccc;
+            /* Warna default bintang */
             cursor: pointer;
         }
 
         .star-rating i.selected,
         .star-rating i:hover,
-        .star-rating i:hover ~ i {
-            color: #FF4500; /* Warna bintang saat dipilih atau di-hover */
-        }
-        .comment-section {
-            max-width: 600px;
-            margin: 2rem auto;
-            background-color: #FFF7E6;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .comment-section h2 {
-            font-size: 1.8rem;
+        .star-rating i:hover~i {
             color: #FF4500;
-            margin-bottom: 1rem;
+            /* Warna bintang saat dipilih atau di-hover */
         }
 
-        .comment-form {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        .comment-form img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .comment-form textarea {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-family: 'Montserrat', sans-serif;
-            resize: none;
-            height: 50px;
-        }
-
-        .comment-form .submit-button {
-            background-color: #FF4500;
-            border: none;
-            color: #fff;
-            padding: 10px 20px;
+        .comments-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #FFF7E6;
             border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            height: 50px;
         }
 
-        .comment-form .submit-button:hover {
-            background-color: #f44708ea;
-            /* Warna latar belakang saat hover */
-        }
-
-        .comments {
-            margin-top: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .comments-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            color: #333;
         }
 
         .comment {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .comment img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .comment-content {
-            background-color: #FFFFFF;
+            margin-bottom: 15px;
             padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #FFF7E6;
+            border: 1px solid #FFF7E6;
+            border-radius: 5px;
         }
 
-        .comment-content p {
+        .comment p {
             margin: 0;
-            font-size: 1rem;
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .comment .authorName {
+            font-weight: bold;
             color: #333;
+        }
+
+        .comment .time {
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        .comment .delete-icon {
+            cursor: pointer;
+            color: #e74c3c;
+            float: right;
+        }
+
+        .comments-section form {
+            margin-top: 20px;
+        }
+
+        .comments-section textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #FFF7E6;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        .comments-section button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #F44708;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comments-section button:hover {
+            background-color: #ca2103;
         }
 
         .recipe-author {
@@ -474,12 +461,14 @@
     <nav class="navbar navbar-expand-lg">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="#">
-            <img src="{{url('frontend/images/logo.png')}}" alt="Recipe Ripple" width="30" class="me-2" style="border-radius: 50%;">
+            <img src="{{ url('frontend/images/logo.png') }}" alt="Recipe Ripple" width="30" class="me-2"
+                style="border-radius: 50%;">
             Recipe <span style="color: #F44708;">Ripple</span>
         </a>
 
         <!-- Toggler for mobile view -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -488,19 +477,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/beranda" style="display: flex; flex-direction: column; align-items: center;">
+                    <a class="nav-link" href="/beranda"
+                        style="display: flex; flex-direction: column; align-items: center;">
                         <i class="fas fa-home"></i>
                         Beranda
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="searchresep" style="display: flex; flex-direction: column; align-items: center; color:#F44708"">
+                    <a class="nav-link active" href="/resep"
+                        style="display: flex; flex-direction: column; align-items: center; color:#F44708"">
                         <i class="fas fa-book"></i>
                         Resep
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;">
+                    <a class="nav-link" href="/writeresep"
+                        style="display: flex; flex-direction: column; align-items: center;">
                         <i class="fas fa-pen"></i>
                         Tulis
                     </a>
@@ -508,16 +500,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center;">
                         <i class="fas fa-bell"></i>
-                        @if($counts > 0)
-                        Notifikasi ({{ $counts }})
-                        @elseif($counts == 0)
-                        Notifikasi
+                        @if($unreadNotificationsCount > 0)
+                            Notifikasi ({{ $unreadNotificationsCount }})
+                        @else
+                            Notifikasi
                         @endif
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
-                        <img src="{{ ('frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle me-2" width="30" height="30" />
+                        <img src="{{ 'frontend/images/profile1.jpg' }}" alt="User Profile" class="rounded-circle me-2"
+                            width="30" height="30" />
                         <span>Profil</span>
                     </a>
                 </li>
@@ -527,7 +520,10 @@
 
     <div class="container">
         <div class="video-placeholder">
-            <iframe class="responsive-iframe" src="https://www.youtube.com/embed/WWq7En1CZu4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="responsive-iframe" src="https://www.youtube.com/embed/WWq7En1CZu4" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            {{-- <a href="{{ route('resep.show', ['id' => $recipe->id]) }}">View Recipe</a> --}}
         </div>
 
         <div class="rating-container" style="margin: 1rem 0;">
@@ -539,110 +535,79 @@
                 <i class="fas fa-star" data-rating="4"></i>
                 <i class="fas fa-star" data-rating="5"></i>
             </div>
-        </div>        
+        </div>
 
         <div class="title-container" style="margin-bottom: 10px;">
-            Nasi Goreng Kampung kari dengan ikan teri dan Pete (bumbu instant)
+            {{ $recipe->name }}
         </div>
 
         <div class="text-container" style="margin-bottom: 10px;">
-            Nasi goreng kari ini dimasak dengan bumbu nasi goreng kampung munik dan diberi bubuk kari dan daun kari. Rasa otentik dari bumbu munik ditambah bubuk kari serta tambahan teri dan Pete, memberi sensasi makan yg luar biasa. Yuks kita coba...
+            {{ $recipe->description }}
         </div>
+
         <p class="section-title">Bahan-bahan</p>
         <div class="text-container" style="margin-bottom: 10px;">
-            <p>2 Piring nasi</p>
-            <p>1 kg bumbu nasi goreng kampung munik</p>
-            <p>1 sdm bubuk kari</p>
-            <p>1 papan petai</p>
-            <p>50 gr ikan teri, goreng kering</p>
-            <p>5 buah bawang merah iris halus</p>
-            <p>6 buah cabe rawit merah, iris bulat</p>
-            <p>1 batang daun bawang, iris halus</p>
-            <p>4 batang daun kari</p>
-            <p>1 butir Telur puyuh ceplok</p>
+            @foreach ($recipe->bahan as $ingredient)
+                <p>{{ $ingredient }}</p>
+            @endforeach
         </div>
 
         <p class="section-title">Langkah-langkah</p>
-        <div class="text-container">
-            <p>1. Tumis bawang merah hingga wangi, lalu masukkan cabe rawit merah, masak hingga cabe agak layu</p>
-        </div>
-        <div class="step">
-            <div class="step-content">
-                <div class="step-images">
-                    <img src="{{url('frontend/images/Step1.png')}}" alt="Step 1">
-                    <img src="{{url('frontend/images/Step2.png')}}" alt="Step 2">
+        @foreach ($recipe->langkah as $index => $step)
+            <div class="text-container">
+                <p>{{ $index + 1 }}. {{ $step }}</p>
+            </div>
+            <div class="step">
+                <div class="step-content">
+                    <div class="step-images">
+                        @if (isset($recipe->langkah_image[$index]) && is_array($recipe->langkah_image[$index]))
+                            @foreach ($recipe->langkah_image[$index] as $image)
+                                <img src="{{ url('frontend/images/' . $image) }}" alt="Step {{ $index + 1 }}">
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
 
-        <div class="text-container">
-            <p>2. Tambahkan nasi, bumbu nasi goreng munik dan bubuk kari</p>
-        </div>
-        <div class="step">
-            <div class="step-content">
-                <div class="step-images">
-                    <img src="{{url('frontend/images/Step3.png')}}" alt="Step 3">
-                    <img src="{{url('frontend/images/Step4.png')}}" alt="Step 4">
-                    <img src="{{url('frontend/images/Step5.png')}}" alt="Step 5">
-                </div>
+        <div class="comments-section">
+            <h2>Komentar</h2>
+            <div id="commentsContainer">
+                @foreach ($comments as $comment)
+                    <div class="comment" id="comment-{{ $comment->id }}">
+                        <p class="authorName">{{ $comment->user->name }}</p>
+                        <p>{{ $comment->comment_text }}</p>
+                        <p class="time">{{ $comment->created_at }}</p>
+                        @if ($comment->user_id === auth()->id())
+                            <i class="fa fa-trash delete-icon" title="Hapus Komentar"
+                                onclick="deleteComment({{ $comment->id }})"
+                                data-comment-id="{{ $comment->id }}"></i>
+                        @endif
+                    </div>
+                @endforeach
             </div>
-        </div>
 
-        <div class="text-container">
-            <p>3. Tambahkan ikan teri dan petai, laku masukkan daun bawang dan daun kari</p>
-        </div>
-        <div class="step">
-            <div class="step-content">
-                <div class="step-images">
-                    <img src="{{url('frontend/images/Step6.png')}}" alt="Step 6">
-                    <img src="{{url('frontend/images/Step7.png')}}" alt="Step 7">
-                </div>
-            </div>
-        </div>
-
-        <div class="text-container">
-            <p>4. Angkat dan sajikan dengan pelengkap</p>
-        </div>
-        <div class="step">
-            <div class="step-content">
-                <div class="step-images">
-                    <img src="{{url('frontend/images/Step8.png')}}" alt="Step 8">
-                </div>
-            </div>
+            @auth
+                <!-- Form untuk menambahkan komentar baru -->
+                <form id="commentForm" action="{{ route('comments.store', ['id' => $recipe->id]) }}" method="POST">
+                    @csrf
+                    <textarea id="commentInput" name="comment_text" rows="3" required></textarea>
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                    <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
+                    <button type="submit">Tambah Komentar</button>
+                </form>
+            @else
+                <p>Silakan <a href="{{ route('login') }}">login</a> untuk menambahkan komentar.</p>
+            @endauth
         </div>
     </div>
-
-    <div class="comment-section">
-        <h2>Komentar</h2>
-        <div class="comment-form">
-            <img src="{{ ('frontend/images/profile1.jpg') }}" alt="Foto Profil">
-            <textarea id="commentInput" placeholder="Beri komentar"></textarea>
-            <button class="submit-button" onclick="addComment()">
-                <i class="fa fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-    <div class="recipe-author">
-        <div id="commentsContainer">
-
-        </div>
-    </div>
-
-    @foreach ($comments as $comment)
-    <div class="recipe-author">
-        <div class="author-info">
-            <p class="authorName"> {{ $comment->user->name  }}</p>
-            <p>{{ $comment->comment_text }}</p>
-            <p class="time">{{ $comment->created_at }}</p>
-            <i class="fa fa-trash delete-icon" title="Hapus Komentar" onclick="deleteComment(this)" data-comment-id="{{ $comment->id }}"></i>
-        </div>
-    </div>
-    @endforeach
-
 
     <div class="about-container">
         <h2>About Us</h2>
-        <p>At RecipeRipple, we believe that cooking connects people. Our platform allows food lovers to discover, share, and enjoy recipes from around the world. Whether you’re a beginner or an experienced cook, we provide an easy way to explore new dishes, upload your own creations, and engage with a vibrant community.</p>
+        <p>At RecipeRipple, we believe that cooking connects people. Our platform allows food lovers to discover,
+            share,
+            and enjoy recipes from around the world. Whether you’re a beginner or an experienced cook, we provide an
+            easy way to explore new dishes, upload your own creations, and engage with a vibrant community.</p>
         <p>Join us in spreading the joy of cooking, one recipe at a time!</p>
         <h2>Contact</h2>
         <div class="social-icons-container">
@@ -666,7 +631,8 @@
         </div>
         <form action="{{ route('logout') }}" method="POST">
             @csrf
-            <button type="submit" style="width: 100%; background-color: #f44708; color: white; border: none; border-radius: 5px; padding: 0.5rem; cursor: pointer;">
+            <button type="submit"
+                style="width: 100%; background-color: #f44708; color: white; border: none; border-radius: 5px; padding: 0.5rem; cursor: pointer;">
                 Keluar
             </button>
         </form>
@@ -685,20 +651,21 @@
             // For example, redirect or perform logout logic here
         }
 
-        function addComment() {
+        document.getElementById('commentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
             const commentInput = document.getElementById('commentInput');
             const commentText = commentInput.value.trim();
 
             if (commentText !== "") {
-                // Mengirim komentar ke server menggunakan Axios
-                axios.post('/comments/add', {
+                axios.post('{{ route('comments.store', ['id' => $recipe->id]) }}', {
                         comment_text: commentText,
-                        user_id: 1 // Ganti dengan ID user yang login
+                        user_id: {{ auth()->user()->id }},
+                        recipe_id: {{ $recipe->id }}
                     })
                     .then(response => {
                         const commentData = response.data.comment;
                         const authorName = response.data.authorName;
-                        const commentId = commentData.id;
 
                         // Ambil container untuk menampilkan komentar
                         const commentsContainer = document.getElementById('commentsContainer');
@@ -706,65 +673,45 @@
                         // Buat elemen komentar baru
                         const commentDiv = document.createElement('div');
                         commentDiv.className = 'comment';
+                        commentDiv.id = `comment-${commentData.id}`;
                         commentDiv.innerHTML = `
-                <div class="author-info">
-                    <p class="authorName">${authorName}</p>
-                    <p>${commentData.comment_text}</p>
-                    <p class="time">${new Date(commentData.created_at).toLocaleString()}</p>
-                    <i class="fa fa-trash delete-icon" title="Hapus Komentar"></i>
-                </div>
-            `;
-
+                        <p class="authorName">${authorName}</p>
+                        <p>${commentData.comment_text}</p>
+                        <p class="time">${new Date(commentData.created_at).toLocaleString()}</p>
+                        <i class="fa fa-trash delete-icon" title="Hapus Komentar" onclick="deleteComment(${commentData.id})" data-comment-id="${commentData.id}"></i>
+                    `;
                         // Tambahkan komentar baru ke dalam container
                         commentsContainer.prepend(commentDiv);
 
+                        // Perbarui notifikasi di navbar
+                        const notificationCount = document.getElementById('notificationCount');
+                        notificationCount.textContent = parseInt(notificationCount.textContent) + 1;
+
                         // Kosongkan input setelah komentar ditambahkan
                         commentInput.value = "";
-
-                        // Tambahkan event listener untuk menghapus komentar
-                        const deleteIcon = commentDiv.querySelector('.delete-icon');
-                        deleteIcon.addEventListener('click', function() {
-                            deleteComment(commentId, commentDiv);
-                        });
-
                     })
                     .catch(error => {
-                        console.error('Terjadi kesalahan:', error.response ? error.response.data : error.message);
-                        alert('Gagal menambahkan komentar.');
+                        console.error('Error adding comment:', error);
                     });
-            } else {
-                alert("Komentar tidak boleh kosong!");
             }
-        }
+        });
 
-        // Fungsi untuk menghapus komentar
-        function deleteComment(button) {
-            const commentId = button.getAttribute('data-comment-id'); // Ambil ID komentar dari atribut data
-
-            // Kirim request DELETE
-            fetch(`/comment/${commentId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Token CSRF
-                    },
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Pastikan elemen yang ingin dihapus masih ada
-                        const commentElement = button.closest('.comment');
-                        if (commentElement) {
-                            // Jika masih ada, hapus elemen tersebut dari DOM
-                            commentElement.remove();
+        function deleteComment(commentId) {
+            axios.delete(`/comments/${commentId}`)
+                .then(response => {
+                    if (response.data.success) {
+                        const commentDiv = document.getElementById(`comment-${commentId}`);
+                        if (commentDiv) {
+                            commentDiv.remove();
                         }
-
-                        // Refresh halaman untuk mendapatkan data terbaru
-                        location.reload();
                     } else {
-                        alert(data.message); // Jika gagal, tampilkan pesan
+                        alert('Failed to delete comment.');
                     }
                 })
+                .catch(error => {
+                    console.error('Error deleting comment:', error);
+                    alert('Failed to delete comment.');
+                });
         }
 
 
@@ -777,33 +724,32 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const stars = document.querySelectorAll('.star-rating i');
             let currentRating = 0;
 
             stars.forEach(star => {
-                star.addEventListener('click', function () {
+                star.addEventListener('click', function() {
                     currentRating = parseInt(this.getAttribute('data-rating'));
                     stars.forEach((s, index) => {
                         s.classList.toggle('selected', index < currentRating);
                     });
                 });
 
-                star.addEventListener('mouseover', function () {
+                star.addEventListener('mouseover', function() {
                     const hoverRating = parseInt(this.getAttribute('data-rating'));
                     stars.forEach((s, index) => {
                         s.classList.toggle('selected', index < hoverRating);
                     });
                 });
 
-                star.addEventListener('mouseout', function () {
+                star.addEventListener('mouseout', function() {
                     stars.forEach((s, index) => {
                         s.classList.toggle('selected', index < currentRating);
                     });
                 });
             });
         });
-
     </script>
 </body>
 

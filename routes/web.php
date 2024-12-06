@@ -8,13 +8,12 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\signupController;
 use App\Http\Controllers\ProfileController;
-
-use App\Http\Controllers\RecipeController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\SocialiteController;
 use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +64,6 @@ Route::get('/user', [UserController::class, 'index'])
 
 Route::get('/', function () {
     return view('HomePage');
-
 });
 
 Route::get('/beranda', function () {
@@ -89,9 +87,9 @@ Route::put('/admin/user/{id}', [UserController::class, 'update'])->name('user.up
 Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 
-Route::get('/admin/resep', function () {
-    return view('Admin/resepPage');
-});
+// Route::get('/admin/resep', function () {
+//     return view('Admin/resepPage');
+// });
 
 Route::get('/admin/komentar', function () {
     return view('Admin/komentarPage');
@@ -101,14 +99,8 @@ Route::get('/writeresep', function () {
     return view('writeResepPage');
 });
 
-// Route::get('/resep', function () {
-//     return view('resepPage');
-// });
 
-Route::get('/resep', [RecipeController::class, 'show'])->name('recipe.show');
-
-
-Route::get('/notifikasi', [NotifikasiController::class, 'show']);
+Route::get('/notifikasi', [NotificationController::class, 'show']);
 
 Route::get('/profil', function () {
     return view('profilPage');
@@ -127,22 +119,34 @@ Route::get('/editprofil', [ProfileController::class, 'edit'])->name('profile.edi
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //Route::post('/updateprofil',[ProfileController::class, 'update'] )->name('updateprofil');
 
-Route::post('/recipes', [RecipeController::class, 'store'])->name('recipe.store');
+Route::get('/resep/{id}', [RecipeController::class, 'show'])->name('resep.show');
+Route::post('/resep/{id}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+Route::get('/notifikasi', [NotificationController::class, 'index'])->name('notifications.index');
+Route::post('/notifikasi/read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/resep/{id}', [RecipeController::class, 'show'])->name('resep.show');
+    Route::post('/resep/{id}/comments', [CommentController::class, 'store'])->name('comments.store');
+});
+// Route::match(['get', 'post'], '/resep/{id}', [RecipeController::class, 'show'])->name('recipe.show');
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::post('/comments/add', [RecipeController::class, 'addComment']);
 Route::delete('/comment/{id}', [RecipeController::class, 'destroy'])->name('comment.destroy');
 
-Route::post('/comments/read/{id}', [NotifikasiController::class, 'read'])->name('comments.read');
-Route::get('/comments/readed', [NotifikasiController::class, 'readed'])->name('comments.readed');
+Route::post('/comments/read/{id}', [NotificationController::class, 'read'])->name('comments.read');
+Route::get('/comments/readed', [NotificationController::class, 'readed'])->name('comments.readed');
 
 Route::get('/recipes', function () {
     return view('resepdetailPage');
 });
 
-Route::get('/searchresep', function () {
+Route::get('/resep', function () {
     return view('searchresepPage');
 });
 
-Route::get('/resep/cari', [RecipeController::class, 'search'])->name('resep.search');
+// Route::get('/resep/cari', [RecipeController::class, 'search'])->name('resep.search');
 
 Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
 
@@ -156,5 +160,17 @@ Route::get('/pencarian', function () {
 });
 
 Route::get('/search', [RecipeController::class, 'search'])->name('recipes.search');
-Route::get('/recipes/{id}', [RecipeController::class, 'show'])->name('recipes.show');
 
+// Route::resource('kategori', KategoriController::class);
+Route::resource('recipe', RecipeController::class);
+Route::apiResource('recipes', RecipeController::class);
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/resep', [RecipeController::class, 'adminIndex'])->name('admin.recipes.index');
+    Route::get('/admin/resep/create', [RecipeController::class, 'create'])->name('admin.recipes.create');
+    Route::post('/admin/resep', [RecipeController::class, 'store'])->name('admin.recipes.store');
+    Route::get('/admin/resep/{id}', [RecipeController::class, 'show'])->name('admin.recipes.show');
+    Route::get('/admin/resep/{id}/edit', [RecipeController::class, 'adminEdit'])->name('admin.recipes.edit');
+    Route::put('/admin/resep/{id}', [RecipeController::class, 'update'])->name('admin.recipes.update');
+    Route::delete('/admin/resep/{id}', [RecipeController::class, 'destroy'])->name('admin.recipes.destroy');
+});

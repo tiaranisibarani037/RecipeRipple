@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -23,9 +24,22 @@ class AdminController extends Controller
             $userData[] = $userRegistrations->get($month, 0); // Jika tidak ada data, isi dengan 0
         }
 
+        // Ambil data jumlah resep dari database
+        $recipeCounts = Recipe::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->pluck('count', 'month')
+            ->toArray();
+
+        // Buat array dengan 12 bulan dan isi dengan data dari database
+        $recipeData = array_fill(1, 12, 0);
+        foreach ($recipeCounts as $month => $count) {
+            $recipeData[$month] = $count;
+        }
+
         // Mengirim data ke view
         return view('Admin/adminPage', [
-            'userData' => $userData
+            'userData' => $userData,
+            'recipeData' => $recipeData
         ]);
     }
 }

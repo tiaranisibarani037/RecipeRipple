@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class SignupController extends Controller
 {
@@ -43,20 +44,26 @@ class SignupController extends Controller
         $googleToken = $isGoogleUser ? $request->google_token : null;
 
         // Simpan user baru ke dalam database
-        $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']), // Enkripsi password
-            'nomor_telepon' => $validatedData['nomor_telepon'],
-            'role' => 'user', // Set default role sebagai 'user'
-            'google_id' => $isGoogleUser ? $request->google_id : null, // Set google_id jika ada
-            'google_token' => $googleToken, // Set google_token jika ada
-        ]);
+        try {
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'password' => bcrypt($validatedData['password']), // Enkripsi password
+                'nomor_telepon' => $validatedData['nomor_telepon'],
+                'role' => 'user', // Set default role sebagai 'user'
+                'google_id' => $isGoogleUser ? $request->google_id : null, // Set google_id jika ada
+                'google_token' => $googleToken, // Set google_token jika ada
+            ]);
 
-        // Melakukan login setelah registrasi berhasil
-        Auth::login($user);
+            // Melakukan login setelah registrasi berhasil
+            Auth::login($user);
 
-        // Redirect ke halaman beranda
-        return redirect('/beranda');
+            // Redirect ke halaman beranda
+            return redirect('/beranda');
+        } catch (\Exception $e) {
+            // Log error jika terjadi masalah saat menyimpan data
+            Log::error('Error registering user: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'Failed to register user.']);
+        }
     }
 }

@@ -232,7 +232,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="searchresep" style="display: flex; flex-direction: column; align-items: center; color:#F44708"">
+                <a class="nav-link" href="/resep" style="display: flex; flex-direction: column; align-items: center;">
                     <i class="fas fa-book"></i>
                     Resep
                 </a>
