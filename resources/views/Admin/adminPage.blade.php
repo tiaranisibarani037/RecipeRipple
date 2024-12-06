@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet"/>
+    <link rel="shortcut icon" type="x-icon" href="{{ url('frontend/images/Logo.png') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* General styling */
@@ -80,7 +81,8 @@
             font-size: 1.1em;
         }
 
-        .sidebar a.active, .sidebar a:hover {
+        .sidebar a.active,
+        .sidebar a:hover {
             background-color: #3d1626;
             border-radius: 5px;
         }
@@ -188,11 +190,12 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="logo-container">
-            <img alt="Logo" src="{{ url('../frontend/images/Logo.png') }}"/>
+            <img alt="Logo" src="{{ url('../frontend/images/Logo.png') }}" />
             <h1>Recipe <span>Ripple</span></h1>
         </div>
         <a class="active" href="/admin"><i class="fas fa-home"></i>Dashboard</a>
@@ -206,7 +209,8 @@
         <div class="header">
             <div class="menu" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
             <div class="profile" onclick="toggleProfilePopup()">
-                <img alt="Profile Picture" src="{{ url('../frontend/images/profile1.jpg') }}" width="40" height="40"/>
+                <img alt="Profile Picture" src="{{ url('../frontend/images/profile1.jpg') }}" width="40"
+                    height="40" />
                 <span>Admin</span>
             </div>
         </div>
@@ -232,7 +236,8 @@
     <!-- Profile Popup for Logout -->
     <div class="profile-popup" id="profilePopup">
         <div class="d-flex align-items-center">
-            <img src="{{ url('../frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle" width="40" height="40"/>
+            <img src="{{ url('../frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"
+                width="40" height="40" />
             <div>
                 <a href="/profil">
                     <h5>Admin</h5>
@@ -269,8 +274,10 @@
             }
         };
 
-        // Data user registration
+
+        // Ambil data dari PHP ke JavaScript
         const userData = @json($userData);
+        const recipeData = @json($recipeData);
 
         const userCtx = document.getElementById('userChart').getContext('2d');
         const userChart = new Chart(userCtx, {
@@ -291,10 +298,10 @@
         const recipeChart = new Chart(recipeCtx, {
             type: 'line',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: 'Jumlah Resep',
-                    data: [10, 20, 30, 40, 50, 60],
+                    data: Object.values(recipeData),
                     fill: false,
                     borderColor: 'rgb(255, 99, 132)',
                     tension: 0.1
@@ -318,4 +325,5 @@
         });
     </script>
 </body>
+
 </html>

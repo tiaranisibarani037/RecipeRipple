@@ -12,9 +12,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->foreignId('kategori_id')->constrained('categories')->onDelete('cascade');
             $table->string('video_path')->nullable();
             $table->json('bahan'); // Stores ingredients as a JSON array
             $table->json('langkah'); // Stores steps as a JSON array
+            $table->json('langkah_image'); // Stores ingredients as a JSON array
             $table->timestamps();
         });
     }

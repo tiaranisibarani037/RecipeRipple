@@ -215,7 +215,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="searchresep" style="display: flex; flex-direction: column; align-items: center;">
+                  <a class="nav-link" href="/resep" style="display: flex; flex-direction: column; align-items: center;">
                       <i class="fas fa-book"></i>
                       Resep
                   </a>

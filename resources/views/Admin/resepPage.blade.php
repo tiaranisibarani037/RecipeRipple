@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Management</title>
-    <link rel="shortcut icon" type="x-icon" href="{{url('frontend/images/Logo.png')}}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet"/>
+    <link rel="shortcut icon" type="x-icon" href="{{ url('frontend/images/Logo.png') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -75,7 +76,8 @@
             font-size: 1.1em;
         }
 
-        .sidebar a.active, .sidebar a:hover {
+        .sidebar a.active,
+        .sidebar a:hover {
             background-color: #3d1626;
             border-radius: 5px;
         }
@@ -160,7 +162,8 @@
             margin-top: 20px;
         }
 
-        .recipe-table th, .recipe-table td {
+        .recipe-table th,
+        .recipe-table td {
             border: 1px solid #ddd;
             padding: 12px;
             text-align: left;
@@ -191,7 +194,9 @@
             background-color: #ff6347;
         }
 
-        .btn-delete, .btn-edit, .btn-view {
+        .btn-delete,
+        .btn-edit,
+        .btn-view {
             padding: 5px 10px;
             border: none;
             border-radius: 5px;
@@ -224,11 +229,12 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="logo-container">
-            <img alt="Logo" src="{{ url('../frontend/images/Logo.png') }}"/>
+            <img alt="Logo" src="{{ url('../frontend/images/Logo.png') }}" />
             <h1>Recipe <span>Ripple</span></h1>
         </div>
         <a href="/admin"><i class="fas fa-home"></i>Dashboard</a>
@@ -242,47 +248,76 @@
         <div class="header">
             <div class="menu" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
             <div class="profile" onclick="toggleProfilePopup()">
-                <img alt="Profile Picture" src="{{ url('../frontend/images/profile1.jpg') }}" width="40" height="40"/>
+                <img alt="Profile Picture" src="{{ url('../frontend/images/profile1.jpg') }}" width="40"
+                    height="40" />
                 <span>Admin</span>
             </div>
         </div>
 
         <!-- Recipe Management Section -->
-        <h2>Manage Recipes</h2>
+        <h2>Daftar Recipes</h2>
         <button class="btn-add-recipe" onclick="addRecipe()">Tambah Resep</button>
-        
-        <table class="recipe-table">
-            <thead>
-                <tr>
-                    <th>Foto</th>
-                    <th>Nama Resep</th>
-                    <th>Kategori</th>
-                    <th>Deskripsi</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Contoh Data Resep -->
-                <tr>
-                    <td><img src="{{ url('../frontend/images/nasigoreng.png') }}" alt="Recipe Image"></td>
-                    <td>Nasi Goreng</td>
-                    <td>Main Course</td>
-                    <td>Nasi goreng lezat dengan bumbu spesial</td>
-                    <td>
-                        <button class="btn-view" onclick="viewRecipe()">Lihat</button>
-                        <button class="btn-edit" onclick="editRecipe()">Edit</button>
-                        <button class="btn-delete" onclick="deleteRecipe()">Hapus</button>
-                    </td>
-                </tr>
-                <!-- Data resep lainnya dapat ditampilkan di sini -->
-            </tbody>
-        </table>
+            <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #603044; color: white;">
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Deskripsi</th>
+                        <th>Kategori</th>
+                        <th>Video</th>
+                        {{-- <th>bahan</th>
+                        <th>Langkah</th>
+                        <th>Gambar</th> --}}
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($recipes as $recipe)
+                        <tr>
+                            <td>{{ $recipe->id }}</td>
+                            <td>{{ $recipe->name }}</td>
+                            <td>{{ Str::limit($recipe->description, 50) }}</td>
+                            <td>{{ $recipe->category->category_name }}</td>
+                            <td>
+                                @if($recipe->video_path)
+                                    <video width="150" height="100" controls>
+                                        <source src="{{ asset('uploads/recipe/video/' . $recipe->video_path) }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                @else
+                                    No video available
+                                @endif
+                            </td>
+                            {{-- <td>{{ $recipe->bahan }}</td>
+                            <td>{{ $recipe->langkah }}</td>
+                            <td>
+                                @if($recipe->langkah_image)
+                                    @foreach(json_decode($recipe->langkah_image) as $image)
+                                        <img src="{{ asset('uploads/recipe/image/' . $image) }}" width="100" height="100" alt="Step image">
+                                    @endforeach
+                                @else
+                                    No images available
+                                @endif
+                            </td> --}}
+                            <td>
+                                <a href="{{ route('recipe.edit', $recipe->id) }}" style="color: #007bff; text-decoration: none;">Edit</a> |
+                                <form action="{{ route('recipe.destroy', $recipe->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="background-color: transparent; border: none; color: red; cursor: pointer;">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
     </div>
 
     <!-- Profile Popup for Logout -->
     <div class="profile-popup" id="profilePopup">
         <div class="d-flex align-items-center">
-            <img src="{{ url('../frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle" width="40" height="40"/>
+            <img src="{{ url('../frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"
+                width="40" height="40" />
             <div style="margin-left: 10px;">
                 <a href="/profil">
                     <h5>Admin</h5>
@@ -318,29 +353,37 @@
 
         // Fungsi untuk menambah
         function addRecipe() {
-            alert("Fungsi untuk menambah resep baru!");
-            // Tambahkan logika untuk menampilkan form tambah resep atau membuka modal
+            window.location.href = "{{ route('admin.recipes.create') }}";
         }
 
         // Fungsi untuk melihat resep
         function viewRecipe() {
-            alert("Fungsi untuk melihat resep!");
-            // Tambahkan logika untuk menampilkan detail resep atau membuka modal
+            window.location.href = "{{ route('admin.recipes.show', '') }}/" + id;
         }
 
         // Fungsi untuk mengedit resep
         function editRecipe() {
-            alert("Fungsi untuk mengedit resep!");
-            // Tambahkan logika untuk membuka form edit resep atau membuka modal
+            window.location.href = "{{ route('admin.recipes.edit', '') }}/" + id;
         }
 
         // Fungsi untuk menghapus resep
-        function deleteRecipe() {
-            if (confirm("Apakah Anda yakin ingin menghapus resep ini?")) {
-                alert("Resep berhasil dihapus!");
-                // Tambahkan logika penghapusan resep di sini
+        function deleteRecipe(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus resep ini?')) {
+                fetch("{{ route('admin.recipes.destroy', '') }}/" + id, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Gagal menghapus resep');
+                    }
+                });
             }
         }
     </script>
 </body>
+
 </html>
