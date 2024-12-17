@@ -97,7 +97,7 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: left;
-      justify-content: left; 
+      justify-content: left;
       margin-left: auto; /* Center horizontally */
       margin-right: auto; /* Center horizontally */
     }

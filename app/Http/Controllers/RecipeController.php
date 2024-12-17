@@ -2,90 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\User;
 use App\Models\Recipe;
 use App\Models\Kategori;
-use App\Models\Comment;
-use App\Models\Notification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+
 
 class RecipeController extends Controller
 {
-
     public function index()
     {
-        try {
-            // Ambil semua data resep terbaru dengan pagination dan komentar terkait
-            $recipes = Recipe::with('comments')->latest()->paginate(10);
-
-            // Tambahkan link HATEOAS untuk setiap resep
-            foreach ($recipes as $recipe) {
-                $recipe->links = [
-                    'self' => route('recipes.show', ['recipe' => $recipe->id]),
-                    'create' => route('recipes.store'),
-                    'update' => route('recipes.update', ['recipe' => $recipe->id]),
-                    'delete' => route('recipes.destroy', ['recipe' => $recipe->id]),
-                ];
-            }
-
-            return view('recipes.index', compact('recipes'));
-        } catch (\Exception $e) {
-            // Log error jika terjadi masalah saat memuat data
-            Log::error('Error displaying recipes: ' . $e->getMessage());
-            return response()->json(['error' => 'Failed to load recipes.'], 500);
-        }
-    }
-
-    public function adminIndex()
-    {
-        try {
-            $recipes = Recipe::with('category')->orderBy('created_at', 'asc')->get();
-            $categories = Category::all(); // Ambil semua kategori
-            return view('Admin.resepPage', compact('recipes', 'categories'));
-        } catch (\Exception $e) {
-            Log::error('Error displaying admin recipes: ' . $e->getMessage());
-            return back()->withErrors(['error' => 'Failed to load admin recipes.']);
-        }
+        $recipes = Recipe::latest()->paginate(10);
+        return view('recipe.index', compact('recipes'));
     }
 
     public function create()
     {
-        try {
-            $categories = Category::all(); // Ambil semua kategori
-
-            // Tambahkan link HATEOAS untuk kategori
-            foreach ($categories as $category) {
-                $category->links = [
-                    'self' => route('categories.show', ['category' => $category->id]),
-                    'create' => route('categories.store'),
-                    'update' => route('categories.update', ['category' => $category->id]),
-                    'delete' => route('categories.destroy', ['category' => $category->id]),
-                ];
-            }
-
-            return response()->json([
-                'categories' => $categories,
-                'links' => [
-                    'self' => route('recipes.create'),
-                    'store' => route('recipes.store'),
-                ]
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Error displaying create recipe form: ' . $e->getMessage());
-            return response()->json(['error' => 'Failed to load create recipe form.'], 500);
-        }
+        $kategori = Kategori::all();  // Get all categories
+        return view('recipe.create', compact('kategori'));
     }
 
-
-    // Simpan resep baru
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'required',
             'kategori_id' => 'required',
             'bahan' => 'required|array',
@@ -112,10 +53,19 @@ class RecipeController extends Controller
             $file->move(public_path('uploads/recipe/video'), $filename);
         }
 
+        // Handle file upload for gambar
+        $gambar_filename = null;
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $gambar_filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/recipe/gambar'), $gambar_filename);
+        }
+
         // Store the recipe data, using implode() for 'bahan' and 'langkah'
         $recipe = Recipe::create([
             'video_path' => $filename,
             'name' => $request->name,
+            'gambar' => $gambar_filename,
             'description' => $request->description,
             'kategori_id' => $request->kategori_id,
             'bahan' => implode(', ', $request->bahan),  // Store as a comma-separated string
@@ -124,134 +74,47 @@ class RecipeController extends Controller
         ]);
 
         if ($recipe) {
-            // Tambahkan link HATEOAS
-            $recipe->links = [
-                'self' => route('recipes.show', ['recipe' => $recipe->id]),
-                'create' => route('recipes.store'),
-                'update' => route('recipes.update', ['recipe' => $recipe->id]),
-                'delete' => route('recipes.destroy', ['recipe' => $recipe->id]),
-            ];
-
-            return response()->json($recipe, 201);
+            return redirect()->route('recipe.index')->with('success', 'Recipe add successfully.');
         }
 
-        return response()->json(['error' => 'Failed to create recipe.'], 500);
+        return redirect()->route('recipe.index')->with('success', 'Recipe add successfully.');
     }
 
-    // Cari resep berdasarkan nama, deskripsi, atau bahan
-    public function search(Request $request)
-    {
-        try {
-            $query = $request->input('query');
-
-            // Pencarian berdasarkan nama, deskripsi, atau bahan
-            $recipes = Recipe::where('name', 'LIKE', '%' . $query . '%')
-                ->orWhere('description', 'LIKE', '%' . $query . '%')
-                ->orWhereJsonContains('bahan', $query)
-                ->get();
-
-            // Tambahkan link HATEOAS untuk setiap resep
-            foreach ($recipes as $recipe) {
-                $recipe->links = [
-                    'self' => route('recipes.show', ['recipe' => $recipe->id]),
-                    'create' => route('recipes.store'),
-                    'update' => route('recipes.update', ['recipe' => $recipe->id]),
-                    'delete' => route('recipes.destroy', ['recipe' => $recipe->id]),
-                ];
-            }
-
-            return response()->json(['recipes' => $recipes, 'query' => $query]);
-        } catch (\Exception $e) {
-            Log::error('Error searching recipes: ' . $e->getMessage());
-            return response()->json(['error' => 'Failed to perform search.'], 500);
-        }
-    }
-
+    //show
     public function show($id)
     {
         $recipe = Recipe::find($id);
-
-        if (!$recipe) {
-            return redirect()->back()->withErrors(['error' => 'Recipe not found']);
-        }
-
-        $comments = Comment::where('recipe_id', $id)->get();
-        $unreadNotificationsCount = Notification::where('user_id', Auth::id())->where('is_read', false)->count();
-
-        // Tambahkan link HATEOAS
-        $recipe->links = [
-            'self' => route('recipes.show', ['recipe' => $recipe->id]),
-            'create' => route('recipes.store'),
-            'update' => route('recipes.update', ['recipe' => $recipe->id]),
-            'delete' => route('recipes.destroy', ['recipe' => $recipe->id]),
-        ];
-
-        return view('resepPage', compact('recipe', 'comments', 'unreadNotificationsCount'));
+        return view('recipe.show', compact('recipe'));
     }
 
-    public function adminShow($id)
-    {
-        $recipe = Recipe::find($id);
-
-        if (!$recipe) {
-            abort(404, 'Recipe not found');
-        }
-
-        $counts = 0;
-        $comments = Comment::where('recipe_id', $id)->get();
-        return view('Admin.recipe.show', compact('recipe', 'counts', 'comments'));
-    }
-
-    public function adminDestroy($id)
-    {
-        $recipe = Recipe::findOrFail($id);
-        $recipe->delete();
-        return redirect()->route('Admin.resepPage')->with('success', 'Recipe deleted successfully');
-    }
-
+    //destroy
     public function destroy($id)
     {
-        try {
-            $recipe = Recipe::find($id);
-
-            if (!$recipe) {
-                return response()->json(['error' => 'Recipe not found'], 404);
-            }
-
-            $recipe->delete();
-
-            return response()->json([
-                'message' => 'Recipe deleted successfully',
-                'links' => [
-                    'index' => route('recipes.index'),
-                    'create' => route('recipes.create'),
-                    'store' => route('recipes.store'),
-                ]
-            ], 200);
-        } catch (\Exception $e) {
-            Log::error('Error deleting recipe: ' . $e->getMessage());
-            return response()->json(['error' => 'Failed to delete recipe.'], 500);
-        }
-    }
-
-    public function adminEdit($id)
-    {
         $recipe = Recipe::find($id);
-        $categories = Category::all();
-        return view('Admin.recipe.edit', compact('recipe', 'categories'));
+        $recipe->delete();
+        return redirect()->route('recipe.index')->with('success', 'Recipe deleted successfully.');
     }
 
+    //edit
     public function edit($id)
     {
         $recipe = Recipe::find($id);
-        $kategori = Category::all();
-        return view('recipe.edit', compact('recipe', 'kategori'));
+        $kategori = Kategori::all();
+
+        $data = [
+            'recipe' => $recipe,
+            'kategori' => $kategori
+        ];
+
+        return view('recipe.edit', compact('data'));
     }
+
+
+
 
     public function update(Request $request, $id)
     {
-        // Validasi data yang diterima dari form
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'kategori_id' => 'required|exists:kategoris,id',
@@ -261,77 +124,118 @@ class RecipeController extends Controller
             'langkah' => 'required|array',
             'langkah.*' => 'string',
             'langkah_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Temukan data resep berdasarkan ID
         $recipe = Recipe::findOrFail($id);
 
-        // Update data utama resep
-        $recipe->name = $validatedData['name'];
-        $recipe->description = $validatedData['description'];
-        $recipe->kategori_id = $validatedData['kategori_id'];
+        // Update langkah images
+        $langkah_images = json_decode($recipe->langkah_image, true) ?? [];
 
-        // Handle video upload
+        if ($request->hasFile('langkah_image')) {
+            foreach ($request->file('langkah_image') as $index => $file) {
+                if (isset($langkah_images[$index])) {
+                    // Hapus file lama
+                    $oldPath = public_path('uploads/recipe/image/' . $langkah_images[$index]);
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
+                    }
+                }
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('uploads/recipe/image'), $filename);
+                $langkah_images[$index] = $filename;
+            }
+        }
+
+        // Update gambar
+        if ($request->hasFile('gambar')) {
+            if ($recipe->gambar) {
+                $oldGambarPath = public_path('uploads/recipe/gambar/' . $recipe->gambar);
+                if (file_exists($oldGambarPath)) {
+                    unlink($oldGambarPath);
+                }
+            }
+            $gambar_filename = time() . '_' . $request->file('gambar')->getClientOriginalName();
+            $request->file('gambar')->move(public_path('uploads/recipe/gambar'), $gambar_filename);
+            $recipe->gambar = $gambar_filename;
+        }
+
+        // Update video
         if ($request->hasFile('video')) {
-            // Hapus video lama jika ada
-            if ($recipe->video) {
-                Storage::delete($recipe->video);
+            if ($recipe->video_path) {
+                $oldVideoPath = public_path('uploads/recipe/video/' . $recipe->video_path);
+                if (file_exists($oldVideoPath)) {
+                    unlink($oldVideoPath);
+                }
             }
-
-            // Simpan video baru
-            $recipe->video = $request->file('video')->store('videos');
+            $video_filename = time() . '.' . $request->file('video')->getClientOriginalExtension();
+            $request->file('video')->move(public_path('uploads/recipe/video'), $video_filename);
+            $recipe->video_path = $video_filename;
         }
 
-        // Update data bahan-bahan (jika ada relasi)
-        $recipe->bahan()->delete(); // Hapus bahan lama
-        foreach ($validatedData['bahan'] as $bahan) {
-            $recipe->bahan()->create(['nama' => $bahan]);
-        }
+        // Update other fields
+        $recipe->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'kategori_id' => $request->kategori_id,
+            'bahan' => implode(', ', $request->bahan),
+            'langkah' => implode(', ', $request->langkah),
+            'langkah_image' => json_encode($langkah_images),
+        ]);
 
-        // Update data langkah-langkah (jika ada relasi)
-        $recipe->langkah()->delete(); // Hapus langkah lama
-        foreach ($validatedData['langkah'] as $index => $langkah) {
-            $langkahData = [
-                'deskripsi' => $langkah,
-            ];
-
-            // Jika ada gambar langkah
-            if ($request->hasFile("langkah_image.$index")) {
-                $langkahData['gambar'] = $request->file("langkah_image.$index")->store('images/langkah');
-            }
-
-            $recipe->langkah()->create($langkahData);
-        }
-
-        // Simpan data yang di-update
-        $recipe->save();
-
-        // Redirect atau kembalikan respon sukses
-        return redirect()
-            ->route('recipe.index')
-            ->with('success', 'Resep berhasil diperbarui.');
+        return redirect()->route('recipe.index')->with('success', 'Resep berhasil diperbarui.');
     }
 
-    public function rate(Request $request, $id)
+    // $recipe = Recipe::findOrFail($id);
+
+    // // Update data utama resep
+    // $recipe->name = $validatedData['name'];
+    // $recipe->description = $validatedData['description'];
+    // $recipe->kategori_id = $validatedData['kategori_id'];
+
+    // // Handle video upload
+
+
+    // // Update data bahan-bahan
+    // $recipe->bahan = implode(', ', $validatedData['bahan']);
+
+    // // Update data langkah-langkah
+    // $recipe->langkah = implode(', ', $validatedData['langkah']);
+
+    // // Handle langkah images
+    // $langkah_images = [];
+    // foreach ($validatedData['langkah'] as $index => $langkah) {
+    //     // Jika ada gambar langkah
+    //     if ($request->hasFile("langkah_image.$index")) {
+    //         $langkah_images[] = $request->file("langkah_image.$index")->store('images/langkah');
+    //     }
+    // }
+
+    // $recipe->langkah_image = json_encode($langkah_images);
+
+    // // Simpan data yang di-update
+    // $recipe->save();
+
+    // // Redirect atau kembalikan respon sukses
+    // return redirect()
+    //     ->route('recipe.index')
+    //     ->with('success', 'Resep berhasil diperbarui.');
+
+
+    public function dashboard($id)
     {
-        $request->validate([
-            'rating' => 'required|integer|min=1|max=5',
-        ]);
-
-        $recipe = Recipe::findOrFail($id);
-        $recipe->ratings()->create([
-            'user_id' => Auth::id(),
-            'rating' => $request->rating,
-        ]);
-
-        // Buat notifikasi untuk pemilik resep
-        Notification::create([
-            'user_id' => $recipe->user_id,
-            'recipe_id' => $recipe->id,
-            'type' => 'rating',
-            'message' => 'Ada rating baru pada resep Anda.',
-        ]);
-
-        return response()->json(['success' => true]);
+        $recipe = Recipe::find($id); // Mengambil satu data berdasarkan ID
+        if (!$recipe) {
+            return redirect()->back()->with('error', 'Recipe not found.');
+        }
+        return view('user.tampilan', compact('recipe'));
     }
+
+    public function produk()
+    {
+        $recipes = Recipe::all(); // Fetch all recipes
+        return view('user.card', compact('recipes'));
+    }
+
+
 }

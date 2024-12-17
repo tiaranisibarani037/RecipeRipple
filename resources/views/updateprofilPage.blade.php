@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Update Profile</title>
@@ -235,4 +235,4 @@
     window.onload = fetchUpdatedInfo;
   </script>
 </body>
-</html>
+</html> --}}

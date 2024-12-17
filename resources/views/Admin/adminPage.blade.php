@@ -200,7 +200,9 @@
         </div>
         <a class="active" href="/admin"><i class="fas fa-home"></i>Dashboard</a>
         <a href="admin/user"><i class="fas fa-user"></i>User</a>
-        <a href="/admin/resep"><i class="fas fa-book"></i>Resep</a>
+        {{-- <a href="/admin/resep"><i class="fas fa-book"></i>Resep</a> --}}
+        <a href="{{route('recipe.index') }}"><i class="fas fa-book"></i>Tambah recipe</a>
+        <a href="{{route('kategori.index') }}"><i class="fas fa-book"></i>Tambah Kategori</a>
         <a href="/admin/komentar"><i class="fas fa-comments"></i>Komentar</a>
     </div>
 
@@ -293,6 +295,7 @@
                 }]
             }
         });
+
 
         const recipeCtx = document.getElementById('recipeChart').getContext('2d');
         const recipeChart = new Chart(recipeCtx, {

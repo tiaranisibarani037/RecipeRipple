@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-class LoginController extends Controller
+class loginController extends Controller
 {
     // Fungsi untuk menangani login dengan email dan password
     public function postlogin(Request $request)
@@ -38,7 +38,6 @@ class LoginController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
-
     // Fungsi untuk mengarahkan pengguna ke Google untuk login
     public function redirectToGoogle()
     {
