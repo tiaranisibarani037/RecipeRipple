@@ -70,22 +70,6 @@ Route::get('/beranda', function () {
     return view('berandaPage');
 });
 
-Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
-// Route bagian Admin User
-Route::get('/admin/user', [UserController::class, 'index']);
-// Route untuk menampilkan halaman daftar pengguna
-Route::get('/admin/user', [UserController::class, 'index'])->name('user.index');
-
-// Route untuk menyimpan pengguna baru
-Route::post('/admin/user/store', [UserController::class, 'store'])->name('user.store');
-
-// Route untuk memperbarui data pengguna yang ada
-Route::put('/admin/user/{id}', [UserController::class, 'update'])->name('user.update');
-
-// Route untuk menghapus pengguna
-Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
 
 // Route::get('/admin/resep', function () {
 //     return view('Admin/resepPage');
@@ -174,3 +158,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/resep/{id}', [RecipeController::class, 'update'])->name('admin.recipes.update');
     Route::delete('/admin/resep/{id}', [RecipeController::class, 'destroy'])->name('admin.recipes.destroy');
 });
+
+Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+// Route bagian Admin User
+Route::get('/admin/user', [UserController::class, 'index']);
+// Route untuk menampilkan halaman daftar pengguna
+Route::get('/admin/user', [UserController::class, 'index'])->name('user.index');
+
+// Route untuk menyimpan pengguna baru
+Route::post('/admin/user/store', [UserController::class, 'store'])->name('user.store');
+
+// Route untuk memperbarui data pengguna yang ada
+Route::put('/admin/user/{id}', [UserController::class, 'update'])->name('user.update');
+
+// Route untuk menghapus pengguna
+Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
