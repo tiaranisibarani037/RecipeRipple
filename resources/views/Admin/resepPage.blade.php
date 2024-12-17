@@ -240,6 +240,9 @@
         <a href="/admin"><i class="fas fa-home"></i>Dashboard</a>
         <a href="/admin/user"><i class="fas fa-user"></i>User</a>
         <a class="active" href="/admin/resep"><i class="fas fa-book"></i>Resep</a>
+
+        <a href="{{route('recipe.index') }}"><i class="fas fa-book"></i>Tambah recipe</a>
+        <a href="{{route('kategori.index') }}"><i class="fas fa-book"></i>Tambah Kategori</a>
         <a href="/admin/komentar"><i class="fas fa-comments"></i>Komentar</a>
     </div>
 
@@ -255,81 +258,55 @@
         </div>
 
         <!-- Recipe Management Section -->
-        <h2>Daftar Recipes</h2>
-        <button class="btn-add-recipe" onclick="addRecipe()">Tambah Resep</button>
-            <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr style="background-color: #603044; color: white;">
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>Deskripsi</th>
-                        <th>Kategori</th>
-                        <th>Video</th>
-                        {{-- <th>bahan</th>
-                        <th>Langkah</th>
-                        <th>Gambar</th> --}}
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($recipes as $recipe)
-                        <tr>
-                            <td>{{ $recipe->id }}</td>
-                            <td>{{ $recipe->name }}</td>
-                            <td>{{ Str::limit($recipe->description, 50) }}</td>
-                            <td>{{ $recipe->category->category_name }}</td>
-                            <td>
-                                @if($recipe->video_path)
-                                    <video width="150" height="100" controls>
-                                        <source src="{{ asset('uploads/recipe/video/' . $recipe->video_path) }}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                @else
-                                    No video available
-                                @endif
-                            </td>
-                            {{-- <td>{{ $recipe->bahan }}</td>
-                            <td>{{ $recipe->langkah }}</td>
-                            <td>
-                                @if($recipe->langkah_image)
-                                    @foreach(json_decode($recipe->langkah_image) as $image)
-                                        <img src="{{ asset('uploads/recipe/image/' . $image) }}" width="100" height="100" alt="Step image">
-                                    @endforeach
-                                @else
-                                    No images available
-                                @endif
-                            </td> --}}
-                            <td>
-                                <a href="{{ route('recipe.edit', $recipe->id) }}" style="color: #007bff; text-decoration: none;">Edit</a> |
-                                <form action="{{ route('recipe.destroy', $recipe->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" style="background-color: transparent; border: none; color: red; cursor: pointer;">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <h2>Manage Recipes</h2>
+        <button class="btn-add-recipe" onclick="window.location.href='{{ route('recipe.create') }}'">
+            <i class="fas fa-book"></i> Tambah Recipe
+        </button>
+
+        <table class="recipe-table">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Nama Resep</th>
+                    <th>Kategori</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Contoh Data Resep -->
+                <tr>
+                    <td><img src="{{ url('../frontend/images/nasigoreng.png') }}" alt="Recipe Image"></td>
+                    <td>Nasi Goreng</td>
+                    <td>Main Course</td>
+                    <td>Nasi goreng lezat dengan bumbu spesial</td>
+                    <td>
+                        <button class="btn-view" onclick="viewRecipe()">Lihat</button>
+                        <button class="btn-edit" onclick="editRecipe()">Edit</button>
+                        <button class="btn-delete" onclick="deleteRecipe()">Hapus</button>
+                    </td>
+                </tr>
+                <!-- Data resep lainnya dapat ditampilkan di sini -->
+            </tbody>
+        </table>
     </div>
 
     <!-- Profile Popup for Logout -->
-    <div class="profile-popup" id="profilePopup">
-        <div class="d-flex align-items-center">
-            <img src="{{ url('../frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle"
-                width="40" height="40" />
-            <div style="margin-left: 10px;">
-                <a href="/profil">
-                    <h5>Admin</h5>
-                </a>
-                <p>admin@gmail.com</p>
+        <div class="profile-popup" id="profilePopup">
+            <div class="d-flex align-items-center">
+                <img src="{{ url('../frontend/images/profile1.jpg') }}" alt="User Profile" class="rounded-circle" width="40" height="40"/>
+                <div style="margin-left: 10px;">
+                    <a href="/profil">
+                        <h5>Admin</h5>
+                    </a>
+                    <p>admin@gmail.com</p>
+                </div>
             </div>
+            <form action="{{ route('logout') }}" method="POST" style="margin-top: 10px;">
+                @csrf
+                <button type="submit">Keluar</button>
+            </form>
         </div>
-        <form action="{{ route('logout') }}" method="POST" style="margin-top: 10px;">
-            @csrf
-            <button type="submit">Keluar</button>
-        </form>
-    </div>
 
     <script>
         function toggleSidebar() {
@@ -385,5 +362,4 @@
         }
     </script>
 </body>
-
 </html>

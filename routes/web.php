@@ -8,6 +8,8 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\signupController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Resep;
+
 use App\Http\Controllers\SocialiteController;
 use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\NotifikasiController;
@@ -100,7 +102,10 @@ Route::get('/writeresep', function () {
 });
 
 
-Route::get('/notifikasi', [NotificationController::class, 'show']);
+Route::get('/resep', [Resep::class, 'show'])->name('recipe.show');
+
+
+Route::get('/notifikasi', [NotifikasiController::class, 'show']);
 
 Route::get('/profil', function () {
     return view('profilPage');
@@ -146,7 +151,7 @@ Route::get('/resep', function () {
     return view('searchresepPage');
 });
 
-// Route::get('/resep/cari', [RecipeController::class, 'search'])->name('resep.search');
+Route::get('/resep/cari', [RecipeController::class, 'search'])->name('resep.search');
 
 Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
 
@@ -161,16 +166,15 @@ Route::get('/pencarian', function () {
 
 Route::get('/search', [RecipeController::class, 'search'])->name('recipes.search');
 
-// Route::resource('kategori', KategoriController::class);
-Route::resource('recipe', RecipeController::class);
-Route::apiResource('recipes', RecipeController::class);
-
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/resep', [RecipeController::class, 'adminIndex'])->name('admin.recipes.index');
-    Route::get('/admin/resep/create', [RecipeController::class, 'create'])->name('admin.recipes.create');
-    Route::post('/admin/resep', [RecipeController::class, 'store'])->name('admin.recipes.store');
-    Route::get('/admin/resep/{id}', [RecipeController::class, 'show'])->name('admin.recipes.show');
-    Route::get('/admin/resep/{id}/edit', [RecipeController::class, 'adminEdit'])->name('admin.recipes.edit');
-    Route::put('/admin/resep/{id}', [RecipeController::class, 'update'])->name('admin.recipes.update');
-    Route::delete('/admin/resep/{id}', [RecipeController::class, 'destroy'])->name('admin.recipes.destroy');
-});
+Route::resource('kategori', KategoriController::class);
+// Route::resource('recipe', RecipeController::class);
+Route::get('/recipe', [RecipeController::class, 'index'])->name('recipe.index');;
+Route::get('/recipe/create', [RecipeController::class, 'create'])->name('recipe.create');
+Route::get('/recipe/edit/{id}', [RecipeController::class, 'edit'])->name('recipe.edit');
+// Route::post('/recipe/{id}', [RecipeController::class, 'update'])->name('recipe.update');
+Route::put('/recipe/{id}', [RecipeController::class, 'update'])->name('recipe.update');
+Route::delete('/recipe/{id}', [RecipeController::class, 'destroy'])->name('recipe.destroy');
+Route::post('/recipe/{id?}', [RecipeController::class, 'store'])->name('recipe.store');
+//usertampilan
+Route::get('/user/{id}', [RecipeController::class, 'dashboard'])->name('user.tampilan');
+Route::get('/user/produk', [RecipeController::class, 'produk'])->name('user.produk');

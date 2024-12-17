@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
-class SignupController extends Controller
+class signupController extends Controller
 {
     // Fungsi untuk menampilkan halaman registrasi
     public function index(Request $request)

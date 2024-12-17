@@ -317,7 +317,7 @@
                 <i class="bi bi-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: white; pointer-events: none;"></i>
             </form>
         </div> --}}
-        
+
 
         <div class="row">
             <div class="col-md-6 col-lg-3 mb-4">
@@ -443,7 +443,7 @@
         }
         });
         </script>
-        
+
     </div>
     <div class="about-container">
         <h2>About Us</h2>
