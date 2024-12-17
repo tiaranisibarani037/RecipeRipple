@@ -204,8 +204,10 @@
             <h1>Recipe <span>Ripple</span></h1>
         </div>
         <a href="/admin"><i class="fas fa-home"></i>Dashboard</a>
-        <a href="/admin/user"><i class="fas fa-user"></i>User</a>
-        <a href="/admin/resep"><i class="fas fa-book"></i>Resep</a>
+        <a href="admin/user"><i class="fas fa-user"></i>User</a>
+        {{-- <a href="/admin/resep"><i class="fas fa-book"></i>Resep</a> --}}
+        <a href="{{route('recipe.index') }}"><i class="fas fa-book"></i>Tambah recipe</a>
+        <a href="{{route('kategori.index') }}"><i class="fas fa-book"></i>Tambah Kategori</a>
         <a class="active" href="/admin/komentar"><i class="fas fa-comments"></i>Komentar</a>
     </div>
 
@@ -221,7 +223,7 @@
 
         <!-- Comment Management Section -->
         <h2>Manage Comments</h2>
-        
+
         <table class="comment-table">
             <thead>
                 <tr>

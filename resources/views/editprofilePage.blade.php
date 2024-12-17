@@ -252,11 +252,11 @@
   </div>
 
     <!-- Edit Profile Section -->
-    <div class="profile-edit-container" style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); width: 80%; margin: 2rem auto;">        
+    <div class="profile-edit-container" style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); width: 80%; margin: 2rem auto;">
         <form action="{{ route('profile.update') }}" method="POST">
     @csrf
     @method('PUT') <!-- Jika menggunakan method PUT -->
-    
+
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>

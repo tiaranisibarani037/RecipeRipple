@@ -205,7 +205,7 @@
         padding: 2rem;
       }
     }
-    
+
   </style>
 </head>
 
@@ -232,7 +232,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/resep" style="display: flex; flex-direction: column; align-items: center;">
+                <a class="nav-link" href="resep" style="display: flex; flex-direction: column; align-items: center;">
                     <i class="fas fa-book"></i>
                     Resep
                 </a>
@@ -266,7 +266,7 @@
           <h1>Simpan semua masakanmu dalam satu tempat</h1>
           <img alt="Icon of a fork and knife crossed" class="img-fluid" src="{{ ('frontend/images/tulis_resep.png') }}" style="max-width: 100px; height: auto;"/>
           <!-- <button class="btn btn-lg"style="border-radius: 60px;">Tulis Resepmu Disini!</button> -->
-          <a href="recipes" class="btn btn-lg" style="border-radius: 60px;">Tulis Resepmu Disini!</a>
+          <a href="/recipe/create" class="btn btn-lg" style="border-radius: 60px;">Tulis Resepmu Disini!</a>
         </div>
       </div>
     </div>

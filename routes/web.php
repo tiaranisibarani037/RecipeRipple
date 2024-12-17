@@ -8,6 +8,8 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\signupController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Resep;
+
 use App\Http\Controllers\SocialiteController;
 use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\NotifikasiController;
@@ -84,7 +86,10 @@ Route::get('/writeresep', function () {
 });
 
 
-Route::get('/notifikasi', [NotificationController::class, 'show']);
+Route::get('/resep', [Resep::class, 'show'])->name('recipe.show');
+
+
+Route::get('/notifikasi', [NotifikasiController::class, 'show']);
 
 Route::get('/profil', function () {
     return view('profilPage');
@@ -130,7 +135,7 @@ Route::get('/resep', function () {
     return view('searchresepPage');
 });
 
-// Route::get('/resep/cari', [RecipeController::class, 'search'])->name('resep.search');
+Route::get('/resep/cari', [RecipeController::class, 'search'])->name('resep.search');
 
 Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
 
@@ -174,3 +179,16 @@ Route::put('/admin/user/{id}', [UserController::class, 'update'])->name('user.up
 
 // Route untuk menghapus pengguna
 Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+Route::resource('kategori', KategoriController::class);
+// Route::resource('recipe', RecipeController::class);
+Route::get('/recipe', [RecipeController::class, 'index'])->name('recipe.index');;
+Route::get('/recipe/create', [RecipeController::class, 'create'])->name('recipe.create');
+Route::get('/recipe/edit/{id}', [RecipeController::class, 'edit'])->name('recipe.edit');
+// Route::post('/recipe/{id}', [RecipeController::class, 'update'])->name('recipe.update');
+Route::put('/recipe/{id}', [RecipeController::class, 'update'])->name('recipe.update');
+Route::delete('/recipe/{id}', [RecipeController::class, 'destroy'])->name('recipe.destroy');
+Route::post('/recipe/{id?}', [RecipeController::class, 'store'])->name('recipe.store');
+//usertampilan
+Route::get('/user/{id}', [RecipeController::class, 'dashboard'])->name('user.tampilan');
+Route::get('/user/produk', [RecipeController::class, 'produk'])->name('user.produk');
