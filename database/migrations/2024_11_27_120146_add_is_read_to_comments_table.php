@@ -9,20 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->boolean('isRead')->default(0);
+            if (!Schema::hasColumn('comments', 'isRead')) {
+                $table->boolean('isRead')->default(false);
+            }
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('isRead');
+            if (Schema::hasColumn('comments', 'isRead')) {
+                $table->dropColumn('isRead');
+            }
         });
     }
 };

@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kategori', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('kategori')) {
+            Schema::create('kategori', function (Blueprint $table) {
+                $table->id();
+                $table->string('nama');
+                $table->timestamps();
+            });
+        }
     }
 
     public function down()

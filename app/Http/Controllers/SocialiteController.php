@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
@@ -30,7 +31,7 @@ class SocialiteController extends Controller
                     'google_token' => $socialUser->token,
                     'google_refresh_token' => $socialUser->refreshToken,
                     'nomor_telepon' => $socialUser->phoneNumber ?? 'default_phone',
-                    // Tidak perlu password karena sudah nullable
+                    'password' => Hash::make('default_password'),
                 ]
             );
 

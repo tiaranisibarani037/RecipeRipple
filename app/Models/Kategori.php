@@ -10,9 +10,9 @@ class Kategori extends Model
     protected $fillable = ['nama'];
     public $timestamps = true;
 
-    public function recipe()
+    public function recipes()
     {
-        return $this->hasMany(Recipes::class, 'kategori_id');
+        return $this->hasMany(Recipe::class, 'kategori_id');
     }
 }
 

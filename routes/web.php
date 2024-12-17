@@ -89,7 +89,7 @@ Route::get('/writeresep', function () {
 Route::get('/resep', [Resep::class, 'show'])->name('recipe.show');
 
 
-Route::get('/notifikasi', [NotifikasiController::class, 'show']);
+// Route::get('/notifikasi', [NotifikasiController::class, 'show']);
 
 Route::get('/profil', function () {
     return view('profilPage');
