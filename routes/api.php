@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminUserApiController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RecipeController;
 use App\Http\Controllers\Api\ProfileController;
@@ -35,4 +36,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+    Route::apiResource('admin/users', AdminUserApiController::class)->names([
+        'index' => 'api.admin.users.index',
+        'show' => 'api.admin.users.show',
+        'store' => 'api.admin.users.store',
+        'update' => 'api.admin.users.update',
+        'destroy' => 'api.admin.users.destroy',
+    ]);
 });

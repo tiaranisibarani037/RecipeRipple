@@ -321,7 +321,7 @@
 
         <div class="row">
             <div class="col-md-6 col-lg-3 mb-4">
-                <a href="/resep" class="text-decoration-none text-dark">
+                <a href="/resep/1" class="text-decoration-none text-dark">
                     <div class="card">
                         <img alt="Nasi Goreng Kampung" class="card-img-top" height="200" src="{{url('frontend/images/nasi_goreng_kampug.png')}}" width="300"/>
                         <div class="card-body">
