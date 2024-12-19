@@ -297,7 +297,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>Gambar</th>
                         <th>Deskripsi</th>
@@ -312,7 +312,7 @@
                 <tbody>
                     @foreach ($recipes as $recipe)
                         <tr>
-                            <td>{{ $recipe->id }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $recipe->name }}</td>
                             <td>
                                 @if ($recipe->image_path)
@@ -326,11 +326,16 @@
                             <td>{{ $recipe->kategori->nama }}</td>
                             <td>
                                 @if ($recipe->video_path)
-                                    <video width="150" height="100" controls>
-                                        <source src="{{ asset('uploads/recipe/video/' . $recipe->video_path) }}"
-                                            type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
+                                    @if (Str::startsWith($recipe->video_path, 'http'))
+                                        <!-- YouTube Video -->
+                                        <iframe width="150" height="100" src="{{ $recipe->video_path }}" frameborder="0" allowfullscreen></iframe>
+                                    @else
+                                        <!-- Local Video -->
+                                        <video width="150" height="100" controls>
+                                            <source src="{{ asset('uploads/recipe/video/' . $recipe->video_path) }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    @endif
                                 @else
                                     No video available
                                 @endif

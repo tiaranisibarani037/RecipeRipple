@@ -22,6 +22,12 @@ class RecipeController extends Controller
         return view('recipe.create', compact('kategori'));
     }
 
+    public function allResepPage()
+    {
+        $recipes = Recipe::all(); // Ambil semua resep dari database
+        return view('searchresepPage', compact('recipes'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -186,45 +192,9 @@ class RecipeController extends Controller
         return redirect()->route('recipe.index')->with('success', 'Resep berhasil diperbarui.');
     }
 
-    // $recipe = Recipe::findOrFail($id);
-
-    // // Update data utama resep
-    // $recipe->name = $validatedData['name'];
-    // $recipe->description = $validatedData['description'];
-    // $recipe->kategori_id = $validatedData['kategori_id'];
-
-    // // Handle video upload
-
-
-    // // Update data bahan-bahan
-    // $recipe->bahan = implode(', ', $validatedData['bahan']);
-
-    // // Update data langkah-langkah
-    // $recipe->langkah = implode(', ', $validatedData['langkah']);
-
-    // // Handle langkah images
-    // $langkah_images = [];
-    // foreach ($validatedData['langkah'] as $index => $langkah) {
-    //     // Jika ada gambar langkah
-    //     if ($request->hasFile("langkah_image.$index")) {
-    //         $langkah_images[] = $request->file("langkah_image.$index")->store('images/langkah');
-    //     }
-    // }
-
-    // $recipe->langkah_image = json_encode($langkah_images);
-
-    // // Simpan data yang di-update
-    // $recipe->save();
-
-    // // Redirect atau kembalikan respon sukses
-    // return redirect()
-    //     ->route('recipe.index')
-    //     ->with('success', 'Resep berhasil diperbarui.');
-
-
     public function dashboard($id)
     {
-        $recipe = Recipe::find($id); // Mengambil satu data berdasarkan ID
+        $recipe = Recipe::with('comments.user')->find($id); // Mengambil satu data berdasarkan ID dengan komentar dan pengguna terkait
         if (!$recipe) {
             return redirect()->back()->with('error', 'Recipe not found.');
         }
@@ -236,6 +206,4 @@ class RecipeController extends Controller
         $recipes = Recipe::all(); // Fetch all recipes
         return view('user.card', compact('recipes'));
     }
-
-
 }

@@ -5,6 +5,7 @@
     <title>Recipe</title>
     <link rel="shortcut icon" type="x-icon" href="{{ url('frontend/images/Logo.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -243,14 +244,10 @@
 
         .comment-form .submit-button:hover {
             background-color: #f44708ea;
-            /* Warna latar belakang saat hover */
         }
 
-        .comments {
+        .comments-list {
             margin-top: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
         }
 
         .comment {
@@ -272,12 +269,19 @@
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
         }
 
         .comment-content p {
             margin: 0;
             font-size: 1rem;
             color: #333;
+        }
+
+        .comment-content small {
+            display: block;
+            margin-top: 0.5rem;
+            color: #999;
         }
 
         .recipe-author {
@@ -493,63 +497,36 @@
         </button>
 
         <!-- Navigation Links -->
-
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin"
-                        style="display: flex; flex-direction: column; align-items: center;">
+                    <a class="nav-link active" href="/beranda"
+                        style="display: flex; flex-direction: column; align-items: center; ">
                         <i class="fas fa-home"></i>
                         Beranda
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="searchresep"
-                        style="display: flex; flex-direction: column; align-items: center; color:#F44708"">
+                    <a class="nav-link active" href="#"
+                        style="display: flex; flex-direction: column; align-items: center; color: #F44708;">
                         <i class="fas fa-book"></i>
                         Resep
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="/writeresep" style="display: flex; flex-direction: column; align-items: center;">
+                <li class="nav-item">
+                    <a class="nav-link" href="/writeresep"
+                        style="display: flex; flex-direction: column; align-items: center;">
                         <i class="fas fa-pen"></i>
                         Tulis
                     </a>
-                </li> --}}
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center;">
-                        <i class="fas fa-bell"></i>
-                        @if ($counts > 0)
-                        Notifikasi ({{ $counts }})
-                        @elseif($counts == 0)
-                        Notifikasi
-                        @endif
-                    </a>
-                </li> --}}
+                </li>
+                <!-- Profile Link -->
                 <li class="nav-item">
-                    <div class="nav-link profile" onclick="toggleProfilePopup()">
-                        <img alt="Profile Picture" src="{{ url('../frontend/images/profile1.jpg') }}" width="40"
-                            height="40" />
-                        <span>Admin</span>
-                    </div>
-                    <!-- Profile Popup for Logout -->
-                    <div class="profile-popup" id="profilePopup">
-                        <div class="d-flex align-items-center">
-                            <img src="{{ url('../frontend/images/profile1.jpg') }}" alt="User Profile"
-                                class="rounded-circle" width="40" height="40" />
-                            <div style="margin-left: 10px;">
-                                <a href="/profil">
-                                    <h5>Admin</h5>
-                                </a>
-                                <p>admin@gmail.com</p>
-                            </div>
-                        </div>
-                        <form action="{{ route('logout') }}" method="POST" style="margin-top: 10px;">
-                            @csrf
-                            <button type="submit">Keluar</button>
-                        </form>
-                    </div>
-
+                    <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
+                        <img src="../frontend/images/profile1.jpg" alt="User Profile" class="rounded-circle me-2"
+                            width="30" height="30" />
+                        <span>Profil</span>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -617,70 +594,41 @@
         @endforeach
     </div>
 
-    {{-- <div class="text-container">
-            <p>2. Tambahkan nasi, bumbu nasi goreng munik dan bubuk kari</p>
-        </div>
-        <div class="step">
-            <div class="step-content">
-                <div class="step-images">
-                    <img src="{{url('frontend/images/Step3.png')}}" alt="Step 3">
-                    <img src="{{url('frontend/images/Step4.png')}}" alt="Step 4">
-                    <img src="{{url('frontend/images/Step5.png')}}" alt="Step 5">
-                </div>
-            </div>
-        </div>
-
-        <div class="text-container">
-            <p>3. Tambahkan ikan teri dan petai, laku masukkan daun bawang dan daun kari</p>
-        </div>
-        <div class="step">
-            <div class="step-content">
-                <div class="step-images">
-                    <img src="{{url('frontend/images/Step6.png')}}" alt="Step 6">
-                    <img src="{{url('frontend/images/Step7.png')}}" alt="Step 7">
-                </div>
-            </div>
-        </div>
-
-        <div class="text-container">
-            <p>4. Angkat dan sajikan dengan pelengkap</p>
-        </div>
-        <div class="step">
-            <div class="step-content">
-                <div class="step-images">
-                    <img src="{{url('frontend/images/Step8.png')}}" alt="Step 8">
-                </div>
-            </div>
-        </div> --}}
-    </div>
-
-    <div class="comment-section">
+    <div class="comments-section">
         <h2>Komentar</h2>
-        <div class="comment-form">
-            <img src="{{ 'frontend/images/profile1.jpg' }}" alt="Foto Profil">
-            <textarea id="commentInput" placeholder="Beri komentar"></textarea>
-            <button class="submit-button" onclick="addComment()">
-                <i class="fa fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-    <div class="recipe-author">
         <div id="commentsContainer">
-
+            @foreach ($recipe->comments as $comment)
+                <div class="comment" id="comment-{{ $comment->id }}">
+                    <p class="authorName">{{ $comment->user->name }}</p>
+                    <p>{{ $comment->content }}</p>
+                    <p class="time">{{ $comment->created_at }}</p>
+                    @if ($comment->user_id === auth()->id())
+                        <form id="delete-comment-form-{{ $comment->id }}"
+                            action="{{ route('comments.destroy', $comment->id) }}" method="POST"
+                            style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-danger btn-sm"
+                                onclick="deleteComment({{ $comment->id }})">Hapus</button>
+                        </form>
+                    @endif
+                </div>
+            @endforeach
         </div>
-    </div>
 
-    {{-- @foreach ($comments as $comment)
-    <div class="recipe-author">
-        <div class="author-info">
-            <p class="authorName"> {{ $comment->user->name  }}</p>
-            <p>{{ $comment->comment_text }}</p>
-            <p class="time">{{ $comment->created_at }}</p>
-            <i class="fa fa-trash delete-icon" title="Hapus Komentar" onclick="deleteComment(this)" data-comment-id="{{ $comment->id }}"></i>
-        </div>
+        @auth
+            <!-- Form untuk menambahkan komentar baru -->
+            <form id="commentForm" action="{{ route('comments.store', ['recipe' => $recipe->id]) }}" method="POST">
+                @csrf
+                <textarea id="commentInput" name="content" rows="3" required></textarea>
+                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
+                <button type="submit">Tambah Komentar</button>
+            </form>
+        @else
+            <p>Silakan <a href="{{ route('login') }}">login</a> untuk menambahkan komentar.</p>
+        @endauth
     </div>
-    @endforeach --}}
-
 
     <div class="about-container">
         <h2>About Us</h2>
@@ -697,9 +645,40 @@
         </div>
     </div>
 
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        function deleteComment(commentId) {
+            if (confirm('Apakah Anda yakin ingin menghapus komentar ini?')) {
+                fetch(`/comment/${commentId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const commentElement = document.getElementById(`comment-${commentId}`);
+                            if (commentElement) {
+                                commentElement.remove();
+                            }
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Terjadi kesalahan:', error);
+                        alert('Gagal menghapus komentar.');
+                    });
+            }
+        }
+
         function toggleProfilePopup() {
             console.log("Profile clicked!"); // Debug log
             const popup = document.getElementById("profilePopup");
@@ -774,37 +753,6 @@
             }
         }
 
-        // Fungsi untuk menghapus komentar
-        function deleteComment(button) {
-            const commentId = button.getAttribute('data-comment-id'); // Ambil ID komentar dari atribut data
-
-            // Kirim request DELETE
-            fetch(`/comment/${commentId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                            'content') // Token CSRF
-                    },
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Pastikan elemen yang ingin dihapus masih ada
-                        const commentElement = button.closest('.comment');
-                        if (commentElement) {
-                            // Jika masih ada, hapus elemen tersebut dari DOM
-                            commentElement.remove();
-                        }
-
-                        // Refresh halaman untuk mendapatkan data terbaru
-                        location.reload();
-                    } else {
-                        alert(data.message); // Jika gagal, tampilkan pesan
-                    }
-                })
-        }
-
 
 
         // // Hide popup when clicking outside
@@ -845,4 +793,3 @@
 </body>
 
 </html>
-

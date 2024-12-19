@@ -34,6 +34,11 @@ class Recipe extends Model
         'langkah' => 'array',
     ];
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function kategori()
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');

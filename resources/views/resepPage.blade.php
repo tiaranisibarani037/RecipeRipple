@@ -496,16 +496,7 @@
                         Tulis
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center;">
-                        <i class="fas fa-bell"></i>
-                        @if($unreadNotificationsCount > 0)
-                            Notifikasi ({{ $unreadNotificationsCount }})
-                        @else
-                            Notifikasi
-                        @endif
-                    </a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
                         <img src="{{ 'frontend/images/profile1.jpg' }}" alt="User Profile" class="rounded-circle me-2"
