@@ -131,10 +131,6 @@ Route::get('/recipes', function () {
     return view('resepdetailPage');
 });
 
-Route::get('/resep', function () {
-    return view('searchresepPage');
-});
-
 Route::get('/resep/cari', [RecipeController::class, 'search'])->name('resep.search');
 
 Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
@@ -190,5 +186,11 @@ Route::put('/recipe/{id}', [RecipeController::class, 'update'])->name('recipe.up
 Route::delete('/recipe/{id}', [RecipeController::class, 'destroy'])->name('recipe.destroy');
 Route::post('/recipe/{id?}', [RecipeController::class, 'store'])->name('recipe.store');
 //usertampilan
-Route::get('/user/{id}', [RecipeController::class, 'dashboard'])->name('user.tampilan');
-Route::get('/user/produk', [RecipeController::class, 'produk'])->name('user.produk');
+Route::get('/resep/{id}', [RecipeController::class, 'dashboard'])->name('user.tampilan');
+Route::get('/resep/produk', [RecipeController::class, 'produk'])->name('user.produk');
+
+
+Route::get('/resep', [RecipeController::class, 'allResepPage'])->name('search.resep.page');
+
+Route::post('/recipe/{recipe}/comment', [CommentController::class, 'store'])->name('comments.store');
+Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');

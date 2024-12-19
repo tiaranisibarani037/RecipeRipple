@@ -16,32 +16,46 @@ class RecipeSeeder extends Seeder
     {
         Recipe::create([
             'name' => 'Nasi Goreng',
-            'description' => 'Nasi goreng adalah makanan khas Indonesia yang sangat populer.',
-            'kategori_id' => 2, // Main Course
-            'video_path' => 'https://www.youtube.com/embed/WWq7En1CZu4',
-            'bahan' => ['Nasi', 'Kecap', 'Telur', 'Bawang'], 
-            'langkah' => ['Panaskan minyak', 'Masukkan bawang', 'Masukkan telur', 'Masukkan nasi', 'Tambahkan kecap'], 
-            'langkah_image' => ['step1.jpg', 'step2.jpg', 'step3.jpg', 'step4.jpg', 'step5.jpg'], 
+            'description' => 'Nasi goreng yang lezat dan mudah dibuat.',
+            'video_path' => 'nasi-goreng.mp4',
+            'gambar' => 'nasigoreng.png',
+            'kategori_id' => 1, // Pastikan kategori_id sesuai dengan kategori yang ada
+            'bahan' => 'Nasi, Bawang Merah, Bawang Putih, Kecap, Garam, Telur',
+            'langkah' => 'Tumis bawang merah dan bawang putih, Masukkan nasi, Tambahkan kecap dan garam, Aduk rata, Sajikan dengan telur',
+            'langkah_image' => json_encode(['step1.png', 'step2.png', 'step3.png']),
+        ]);
+
+        Recipe::create([
+            'name' => 'Bubur Kacang Hijau',
+            'description' => 'Bubur kacang hijau yang manis dan lembut.',
+            'video_path' => 'bubur-kacang-hijau.mp4',
+            'gambar' => 'buburkacanghijau.png',
+            'kategori_id' => 2, // Pastikan kategori_id sesuai dengan kategori yang ada
+            'bahan' => 'Kacang Hijau, Gula Merah, Santan, Garam',
+            'langkah' => 'Rendam kacang hijau, Rebus kacang hijau, Tambahkan gula merah dan santan, Masak hingga matang, Sajikan',
+            'langkah_image' => json_encode(['step1.png', 'step2.png', 'step3.png']),
         ]);
 
         Recipe::create([
             'name' => 'Kue Lapis',
-            'description' => 'Kue lapis adalah kue tradisional Indonesia yang berlapis-lapis.',
-            'kategori_id' => 1, // Appetizer
-            'video_path' => 'https://www.youtube.com/embed/example1',
-            'bahan' => ['Tepung beras', 'Santan', 'Gula', 'Pewarna makanan'],
-            'langkah' => ['Campur bahan', 'Tuang adonan', 'Kukus lapisan', 'Ulangi sampai habis'], 
-            'langkah_image' => ['step1.jpg', 'step2.jpg', 'step3.jpg', 'step4.jpg'], 
+            'description' => 'Kue lapis yang manis dan berlapis-lapis.',
+            'video_path' => 'kue-lapis.mp4',
+            'gambar' => 'kuelapis.png',
+            'kategori_id' => 3, // Pastikan kategori_id sesuai dengan kategori yang ada
+            'bahan' => 'Tepung Beras, Santan, Gula, Pewarna Makanan',
+            'langkah' => 'Campur tepung beras dan santan, Tambahkan gula, Bagi adonan dan beri pewarna, Tuang adonan berlapis-lapis, Kukus hingga matang',
+            'langkah_image' => json_encode(['step1.png', 'step2.png', 'step3.png']),
         ]);
 
         Recipe::create([
-            'name' => 'Kue Tart',
-            'description' => 'Kue tart adalah kue yang sering disajikan pada acara ulang tahun.',
-            'kategori_id' => 3, // Dessert
-            'video_path' => 'https://www.youtube.com/embed/example2',
-            'bahan' => ['Tepung terigu', 'Telur', 'Gula', 'Mentega', 'Cokelat'], 
-            'langkah' => ['Kocok telur dan gula', 'Tambahkan tepung', 'Panggang adonan', 'Hias dengan cokelat'], 
-            'langkah_image' => ['step1.jpg', 'step2.jpg', 'step3.jpg', 'step4.jpg'],
+            'name' => 'Cendol',
+            'description' => 'Minuman cendol yang segar dan manis.',
+            'video_path' => 'cendol.mp4',
+            'gambar' => 'cendol.png',
+            'kategori_id' => 3, // Pastikan kategori_id sesuai dengan kategori yang ada
+            'bahan' => 'Tepung Hunkwe, Air, Gula Merah, Santan, Daun Pandan',
+            'langkah' => 'Campur tepung hunkwe dan air, Masak hingga mengental, Cetak cendol, Rebus gula merah dan santan, Sajikan dengan cendol',
+            'langkah_image' => json_encode(['step1.png', 'step2.png', 'step3.png']),
         ]);
     }
 }

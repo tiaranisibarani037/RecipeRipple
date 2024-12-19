@@ -287,12 +287,6 @@
                         Tulis
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/notifikasi" style="display: flex; flex-direction: column; align-items: center;">
-                        <i class="fas fa-bell"></i>
-                        Notifikasi
-                    </a>
-                </li>
                 <!-- Profile Link -->
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
@@ -311,138 +305,22 @@
                 Recipe <span style="color: #FF4500;">Ripple</span>
             </h1>
         </div>
-        {{-- <div class="search-bar" style="position: relative;">
-            <form action="{{ route('resep.search') }}" method="get">
-                <input type="text" name="query" class="form-control btn-danger" placeholder="Search.." style="border-radius: 25px; padding-left: 30px; color: white; background-color: #FF4500; border: none; width: 100%; max-width: 1000px;">
-                <i class="bi bi-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: white; pointer-events: none;"></i>
-            </form>
-        </div> --}}
-
-
+        
         <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4">
-                <a href="/resep/1" class="text-decoration-none text-dark">
-                    <div class="card">
-                        <img alt="Nasi Goreng Kampung" class="card-img-top" height="200" src="{{url('frontend/images/nasi_goreng_kampug.png')}}" width="300"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Resep Nasi Goreng Kampung, Lezat, Gampang</h5>
-                            <p class="card-text">
-                                <span><i class="fas fa-star"></i> 3.8</span>
-                                <span><i class="fas fa-user"></i></span>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4">
-                <a href="/resep/nasi-goreng-pedas-gila" class="text-decoration-none">
-                    <div class="card">
-                        <img alt="Nasi Goreng Pedas Gila" class="card-img-top" height="200" src="{{url('frontend/images/Nasi_Goreng_Pedas.png')}}" width="300"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Resep Nasi Goreng Pedas Gila, Sederhana</h5>
-                            <p class="card-text">
-                                <span><i class="fas fa-star"></i> 4.6</span>
-                                <span><i class="fas fa-user"></i></span>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4">
-                <a href="/resep/nasi-goreng-kambing" class="text-decoration-none">
-                    <div class="card">
-                        <img alt="Nasi Goreng Kambing" class="card-img-top" height="200" src="{{url('frontend/images/Nasi_Goreng_Kambing.png')}}" width="300"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Resep Nasi Goreng Kambing, Rasa Mantap Daging Empuk</h5>
-                            <p class="card-text">
-                                <span><i class="fas fa-star"></i> 4.8</span>
-                                <span><i class="fas fa-user"></i></span>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4">
-                <a href="/resep/nasi-goreng-spesial" class="text-decoration-none">
-                    <div class="card">
-                        <img alt="Nasi Goreng Spesial" class="card-img-top" height="200" src="{{url('frontend/images/Nasi_Goreng_Spesial.png')}}" width="300"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Resep Nasi Goreng Spesial ala Restoran Mewah</h5>
-                            <p class="card-text">
-                                <span><i class="fas fa-star"></i> 5.0</span>
-                                <span><i class="fas fa-user"></i></span>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="load-more">
-        <button id="loadMoreButton">Tampilkan lebih banyak</button>
-        </div>
-
-        <script>
-        const moreRecipes = [
-            {
-                href: "/resep/nasi-goreng-seafood",
-                imgSrc: "{{url('frontend/images/Nasi_Goreng_Seafood.png')}}",
-                imgAlt: "Nasi Goreng Seafood",
-                title: "Resep Nasi Goreng Seafood, Lezat Segar",
-                rating: 4.7,
-            },
-            {
-                href: "/resep/nasi-goreng-vegetarian",
-                imgSrc: "{{url('frontend/images/Nasi_Goreng_Vegetarian.png')}}",
-                imgAlt: "Nasi Goreng Vegetarian",
-                title: "Resep Nasi Goreng Vegetarian, Sehat dan Enak",
-                rating: 4.5,
-            },
-
-            {
-                href: "/resep/nasi-goreng-ayam",
-                imgSrc: "{{url('frontend/images/Nasi_Goreng_Ayam.png')}}",
-                imgAlt: "Nasi Goreng Ayam",
-                title: "Resep Nasi Goreng Ayam, Gurih dan Lezat",
-                rating: 4.6,
-            },
-
-            {
-                href: "/resep/nasi-goreng-teri",
-                imgSrc: "{{url('frontend/images/Nasi_Goreng_Teri.png')}}",
-                imgAlt: "Nasi Goreng Teri",
-                title: "Resep Nasi Goreng Teri, Gurih dan Renyah",
-                rating: 4.3,
-            },
-        ];
-
-        let recipesDisplayed = false;
-        document.getElementById("loadMoreButton").addEventListener("click", function() {
-        if (!recipesDisplayed) {
-            const container = document.querySelector(".row");
-            moreRecipes.forEach(recipe => {
-                const col = document.createElement("div");
-                col.className = "col-md-6 col-lg-3 mb-4";
-                col.innerHTML = `
-                    <a href="${recipe.href}" class="text-decoration-none">
+            @foreach($recipes as $recipe)
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <a href="/resep/{{ $recipe->id }}" class="text-decoration-none text-dark">
                         <div class="card">
-                            <img src="${recipe.imgSrc}" alt="${recipe.imgAlt}" class="card-img-top" height="200" width="300"/>
+                            <img alt="{{ $recipe->name }}" class="card-img-top" height="200" src="{{ url('uploads/recipe/gambar/' . $recipe->gambar) }}" width="300"/>
                             <div class="card-body">
-                                <h5 class="card-title">${recipe.title}</h5>
-                                <p class="card-text">
-                                    <span><i class="fas fa-star"></i> ${recipe.rating}</span>
-                                    <span><i class="fas fa-user"></i></span>
-                                </p>
+                                <h5 class="card-title">{{ $recipe->name }}</h5>
+                                <p class="card-text"></p>
                             </div>
                         </div>
                     </a>
-                `;
-                container.appendChild(col);
-            });
-            recipesDisplayed = true;
-            this.style.display = 'none';
-        }
-        });
-        </script>
+                </div>
+            @endforeach
+        </div>
 
     </div>
     <div class="about-container">

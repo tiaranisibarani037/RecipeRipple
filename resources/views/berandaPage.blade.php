@@ -201,13 +201,6 @@
                         Tulis
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/notifikasi"
-                        style="display: flex; flex-direction: column; align-items: center;">
-                        <i class="fas fa-bell"></i>
-                        Notifikasi
-                    </a>
-                </li>
                 <!-- Profile Link -->
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center" href="#" onclick="toggleProfilePopup()">
@@ -232,9 +225,6 @@
                     <p style="font-size: 19px;">Selamat datang di RecipeRipple, tempat di mana setiap resep menjadi
                         inspirasi! Temukan, bagikan, dan nikmati kreasi kuliner dari seluruh dunia, langsung dari dapur
                         rumah Anda.</p>
-                    <a href="writeresep" class="btn btn-lg"
-                        style="color: #ffffff; background-color: #F44708; font-size: 20px;">Tulis Resepmu Disini!</a>
-
                 </div>
             </div>
         </div>
@@ -278,10 +268,6 @@
 
     <!-- Recipe Categories -->
     <div class="container mt-5">
-        <div class="form-inline">
-            <h2 class="mb-4" style="display: inline-block; margin: 0;">Telusuri Berdasarkan...</h2>
-        </div>
-
         <div class="carousel slide" data-bs-ride="carousel" id="foodCarousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -293,15 +279,6 @@
                                     alt="Appetizer image" style="width: 75%; height:75%; border-radius:15px;">
                                 <div class="card-body">
                                     <h5 class="card-title">Appetizer</h5>
-                                    <p class="card-text">Lihat resep</p>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <span>4.9</span>
-                                        <i class="fas fa-comment" style="margin-left: 210px;"></i>
-                                    </div>
-                                    <div class="heart-icon">
-                                        <i class="fas fa-heart" id="heart-icon"></i>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -312,16 +289,9 @@
                                     alt="maincourse image" style="width: 75%; height:75%; border-radius:15px;">
                                 <div class="card-body">
                                     <h5 class="card-title">Main Course</h5>
-                                    <p class="card-text">Lihat resep</p>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <span>4.6</span>
-                                        <i class="fas fa-comment" style="margin-left: 210px;"></i>
-                                    </div>
+
                                 </div>
-                                <div class="heart-icon">
-                                    <i class="fas fa-heart"></i>
-                                </div>
+
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -331,16 +301,9 @@
                                     alt="Appetizer image" style="width: 75%; height:75%; border-radius:15px;">
                                 <div class="card-body">
                                     <h5 class="card-title">Dessert</h5>
-                                    <p class="card-text">Lihat resep</p>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <span>4.8</span>
-                                        <i class="fas fa-comment" style="margin-left: 210px;"></i>
-                                    </div>
+
                                 </div>
-                                <div class="heart-icon">
-                                    <i class="fas fa-heart"></i>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -357,11 +320,13 @@
             </div>
             <div class="about-content">
                 <h2 style="color: black;">About Us</h2>
-                <p>At RecipeRipple, we believe that cooking connects people. Our platform allows food lovers to
-                    discover, share, and enjoy recipes from around the world. Whether you’re a beginner or an
-                    experienced cook, we provide an easy way to explore new dishes, upload your own creations, and
-                    engage with a vibrant community.</p>
-                <p>Join us in spreading the joy of cooking, one recipe at a time!</p>
+                <p>Di RecipeRipple, kami percaya bahwa memasak menghubungkan orang-orang. Platform kami memungkinkan
+                    pecinta makanan untuk
+                    menemukan, berbagi, dan menikmati resep dari seluruh dunia. Apakah Anda seorang pemula atau koki
+                    berpengalaman, kami menyediakan cara mudah untuk menjelajahi hidangan baru, mengunggah kreasi Anda
+                    sendiri, dan
+                    berinteraksi dengan komunitas yang hidup.</p>
+                <p>Bergabunglah dengan kami dalam menyebarkan kegembiraan memasak, satu resep pada satu waktu!</p>
             </div>
         </div>
     </section>
